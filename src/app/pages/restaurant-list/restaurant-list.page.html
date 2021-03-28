@@ -11,15 +11,11 @@
         <ion-col size="6">
           <ion-item>
             <ion-label>Sort By</ion-label>
-            <ion-select-option
-              value="name"
-              multiple="false"
-              placeholder="Select Sort"
-            >
+            <ion-select value="name" multiple="false">
               <ion-select-option value="name">Name</ion-select-option>
               <ion-select-option value="rating">Rating</ion-select-option>
               <ion-select-option value="proximity">Proximity</ion-select-option>
-            </ion-select-option>
+            </ion-select>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -27,9 +23,9 @@
             <ion-segment-button value="asc">
               <ion-icon name="arrow-up"></ion-icon>
             </ion-segment-button>
-            <ion-segment-button value="desc"
-              ><ion-icon name="arrow-down"></ion-icon
-            ></ion-segment-button>
+            <ion-segment-button value="desc">
+              <ion-icon name="arrow-down"></ion-icon>
+            </ion-segment-button>
           </ion-segment>
         </ion-col>
       </ion-row>
