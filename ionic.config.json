@@ -1,0 +1,7 @@
+{
+  "name": "personal-restaurant-guide",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
