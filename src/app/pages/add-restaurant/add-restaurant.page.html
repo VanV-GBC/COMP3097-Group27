@@ -7,7 +7,65 @@
 <ion-content [fullscreen]="true">
   <ion-grid>
     <ion-row>
-      <ion-col size="12"> TEST </ion-col>
+      <ion-col size="12">
+        <ion-input
+          type="text"
+          id="name"
+          placeholder="Restaurant Name"
+        ></ion-input>
+        <ion-input type="text" id="address" placeholder="Address"></ion-input>
+        <ion-input type="text" id="country" placeholder="Country"></ion-input>
+        <ion-row>
+          <ion-col size="6">
+            <ion-input type="text" id="city" placeholder="City"></ion-input>
+          </ion-col>
+          <ion-col size="6">
+            <ion-input
+              type="text"
+              id="province"
+              placeholder="Province/State"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-input type="tel" id="phone" placeholder="Phone"></ion-input>
+        <ion-row>
+          <ion-col size="6">
+            <ion-input
+              type="number"
+              id="rating"
+              placeholder="Rating"
+              max="5"
+              min="0"
+              value="0"
+            ></ion-input>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label>Tags</ion-label>
+              <ion-select
+                value="japanese"
+                multiple="true"
+                placeholder="Select Tags"
+              >
+                <ion-select-option value="japanese">Japanese</ion-select-option>
+                <ion-select-option value="mexican">Mexican</ion-select-option>
+                <ion-select-option value="grill">Grill</ion-select-option>
+                <ion-select-option value="vegetarian"
+                  >Vegetarian</ion-select-option
+                >
+                <ion-select-option value="chinese">Chinese</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-item>
+          <ion-label position="floating">Notes</ion-label>
+          <ion-textarea rows="6"></ion-textarea>
+        </ion-item>
+        <ion-button expand="block" fill="solid" shape="round">
+          <ion-icon slot="start" name="save"></ion-icon> Save
+        </ion-button>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
