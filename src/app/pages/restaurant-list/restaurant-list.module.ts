@@ -3,16 +3,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RestaurantListPage } from './restaurant-list.page';
-import { RestaurantListPagePageRoutingModule } from './restaurant-list-routing.module';
-import { ItemListComponent } from '../../modules/item-list/item-list.component';
+import { RestaurantListPageRoutingModule } from './restaurant-list-routing.module';
+import { RestaurantItemListComponent } from '../../modules/restaurant-list-item/restaurant-list-item.component';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    RestaurantListPagePageRoutingModule,
+    RestaurantListPageRoutingModule,
   ],
-  declarations: [RestaurantListPage, ItemListComponent],
+  declarations: [RestaurantListPage, RestaurantItemListComponent],
 })
 export class RestaurantListPagePageModule {}
