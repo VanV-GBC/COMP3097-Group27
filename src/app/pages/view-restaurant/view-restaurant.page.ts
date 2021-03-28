@@ -19,4 +19,10 @@ export class ViewRestaurantPage implements OnInit {
     const name = this.activatedRoute.snapshot.paramMap.get('name');
     this.restaurant = this.data.getRestaurantByName(name);
   }
+
+  getBackButtonText() {
+    const win = window as any;
+    const mode = win && win.Ionic && win.Ionic.mode;
+    return mode === 'ios' ? 'Back' : '';
+  }
 }
