@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
-import { ItemListComponent } from './item-list.component';
+import { RestaurantItemListComponent } from './restaurant-list-item.component';
 
 @NgModule({
-  declarations: [ItemListComponent],
-  exports: [ItemListComponent],
+  declarations: [RestaurantItemListComponent],
+  exports: [RestaurantItemListComponent],
   imports: [CommonModule, FormsModule, IonicModule, RouterModule],
 })
 export class ItemListModule {}

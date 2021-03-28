@@ -10,8 +10,15 @@ const routes: Routes = [
   {
     path: 'restaurant/:name',
     loadChildren: () =>
-      import('./modules/item-list/item-list.module').then(
+      import('./modules/restaurant-list-item/restaurant-list-item.module').then(
         (m) => m.ItemListModule
+      ),
+  },
+  {
+    path: 'view-restaurant',
+    loadChildren: () =>
+      import('./pages/view-restaurant/view-restaurant.module').then(
+        (m) => m.ViewRestaurantPageModule
       ),
   },
 ];

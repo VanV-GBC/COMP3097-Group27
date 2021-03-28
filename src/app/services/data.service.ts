@@ -29,7 +29,7 @@ export interface Restaurant {
 export class DataService {
   public restaurants: Restaurant[] = [
     {
-      name: 'Restaurant 1',
+      name: 'Restaurant1',
       rating: 2.5,
       address: {
         address: '123 John St.',
@@ -38,7 +38,7 @@ export class DataService {
       },
     },
     {
-      name: 'Restaurant 2',
+      name: 'Restaurant2',
       rating: 5,
       address: {
         address: '321 Down Ave.',
@@ -47,7 +47,7 @@ export class DataService {
       },
     },
     {
-      name: 'Restaurant 3',
+      name: 'Restaurant3',
       rating: 4.5,
       address: {
         address: '1 Main Rd.',
@@ -63,7 +63,7 @@ export class DataService {
     return this.restaurants;
   }
 
-  public getRestaurantById(name: string): Restaurant {
+  public getRestaurantByName(name: string): Restaurant {
     return this.restaurants[name];
   }
 }
