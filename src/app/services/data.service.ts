@@ -64,6 +64,6 @@ export class DataService {
   }
 
   public getRestaurantByName(name: string): Restaurant {
-    return this.restaurants[name];
+    return this.restaurants.find((i) => i.name == name);
   }
 }
