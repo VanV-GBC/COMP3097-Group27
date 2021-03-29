@@ -21,6 +21,12 @@ const routes: Routes = [
         (m) => m.ViewRestaurantPageModule
       ),
   },
+  {
+    path: 'restaurant/:name/mapfs',
+    loadChildren: () =>
+      import('./pages/map-fullscreen/map-fullscreen.module')
+      .then( m => m.MapFullscreenPageModule)
+  },
 ];
 @NgModule({
   imports: [

@@ -1,3 +1,4 @@
+import { MapFullscreenPageModule } from './../map-fullscreen/map-fullscreen.module';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -7,6 +8,11 @@ const routes: Routes = [
   {
     path: '',
     component: ViewRestaurantPage
+  },
+  {
+    path: 'restaurant/:name/mapfs',
+    loadChildren: () => import('../map-fullscreen/map-fullscreen.module')
+    .then(m => MapFullscreenPageModule)
   }
 ];
 

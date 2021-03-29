@@ -7,17 +7,90 @@
       ></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
+
 </ion-header>
 
-<ion-content [fullscreen]="true" *ngIf="restaurant">
-  <ion-item>
-    <ion-icon name="person-circle" color="primary"></ion-icon>
-    <ion-label class="ion-text-wrap">
-      <h2>{{ restaurant.name }}</h2>
-    </ion-label>
-  </ion-item>
 
+
+
+<ion-content [fullscreen]="true" *ngIf="restaurant">
+  <ion-title>{{ restaurant.name }} </ion-title>
   <div class="ion-padding">
-    <h1>{{ restaurant.rating }}</h1>
+    <h1>Rating Placeholder: {{ restaurant.rating }}</h1>
   </div>
+  <map-partial>
+  </map-partial>
+
+  <ion-grid>
+    <ion-row>
+      <ion-item>
+        <ion-label>Tags</ion-label>
+        <ion-select
+          value="japanese"
+          multiple="true"
+          placeholder="Select Tags"
+        >
+          <ion-select-option value="japanese">Japanese</ion-select-option>
+          <ion-select-option value="mexican">Mexican</ion-select-option>
+          <ion-select-option value="grill">Grill</ion-select-option>
+          <ion-select-option value="vegetarian"
+            >Vegetarian</ion-select-option
+          >
+          <ion-select-option value="chinese">Chinese</ion-select-option>
+        </ion-select>
+
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-col size="7">
+        <ion-row>
+          <ion-text type="text" id="address" placeholder="Address">Address: {{restaurant.address.address}}</ion-text>
+          <ion-text type="text" id="city" placeholder="City">City: {{restaurant.address.city}}</ion-text>
+        </ion-row>
+        <ion-row>
+          <ion-text type="text" id="country" >Country: {{restaurant.address.country}}</ion-text>
+          <ion-text
+          type="text"
+          id="province"
+          placeholder="Province/State"
+          >Province/State: {{restaurant.address.province}}</ion-text>
+          <ion-text type="tel" id="phone">Phone: {{restaurant.phone}}</ion-text>
+        </ion-row>
+
+      </ion-col>
+      <ion-col size="4">
+        <ion-col size="6">
+
+          <ion-button routerLink="restaurant/:name/mapfs" routerDirection="root" >
+            <ion-icon name="call-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+
+        <ion-col size="6">
+
+          <ion-button *ngIf="restaurant"
+          [routerLink]="'/restaurant/' + restaurant.name + '/mapfs'"
+          >
+            <ion-icon name="locate-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+
+
+      </ion-col>
+
+
+
+
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label position="floating">Notes</ion-label>
+        <ion-textarea disabled
+        readonly rows="4"></ion-textarea>
+      </ion-item>
+    </ion-row>
+  </ion-grid>
+
+
+
 </ion-content>

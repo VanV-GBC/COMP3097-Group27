@@ -1,3 +1,6 @@
+import { MapFullscreenPageModule } from './../map-fullscreen/map-fullscreen.module';
+import { MapPartialModule } from './../../modules/map-partial/map-partial.module';
+import { MapPartialComponent } from './../../modules/map-partial/map-partial.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -6,7 +9,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { ViewRestaurantPageRoutingModule } from './view-restaurant-routing.module';
 import { ViewRestaurantPage } from './view-restaurant.page';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -14,7 +16,11 @@ import { ViewRestaurantPage } from './view-restaurant.page';
     FormsModule,
     IonicModule,
     ViewRestaurantPageRoutingModule,
+    MapPartialModule,
   ],
-  declarations: [ViewRestaurantPage],
+  declarations: [
+    ViewRestaurantPage,
+    MapPartialComponent
+  ],
 })
 export class ViewRestaurantPageModule {}
