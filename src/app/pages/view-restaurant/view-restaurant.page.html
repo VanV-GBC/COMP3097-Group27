@@ -1,96 +1,113 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons>
+    <ion-buttons slot="start">
       <ion-back-button
         [text]="getBackButtonText()"
         defaultHref="/tabs/restaurant-list"
       ></ion-back-button>
     </ion-buttons>
-  </ion-toolbar>
+    <ion-buttons slot="primary">
+      <!-- TODO: Add rout to Add page and edit it there-->
+      <ion-icon slot="icons-only" name="create">Edit</ion-icon>
+    </ion-buttons>
 
+    <ion-title>{{ restaurant.name }}</ion-title>
+  </ion-toolbar>
 </ion-header>
 
-
-
-
 <ion-content [fullscreen]="true" *ngIf="restaurant">
-  <ion-title>{{ restaurant.name }} </ion-title>
   <div class="ion-padding">
-    <h1>Rating Placeholder: {{ restaurant.rating }}</h1>
+    <ionic-rating-component
+      #rating
+      activeIcon="star"
+      defaultIcon="star-outline"
+      halfIcon="star-half"
+      halfStar="true"
+      activeColor="#dbb04a"
+      defaultColor="#dbb04a"
+      readonly="false"
+      rating="{{ restaurant.rating }}"
+      fontSize="20px"
+      (ratingChanged)="onRatingChange($event)"
+    ></ionic-rating-component>
   </div>
-  <map-partial>
-  </map-partial>
+  <map-partial> </map-partial>
 
   <ion-grid>
     <ion-row>
-      <ion-item>
-        <ion-label>Tags</ion-label>
-        <ion-select
-          value="japanese"
-          multiple="true"
-          placeholder="Select Tags"
-        >
-          <ion-select-option value="japanese">Japanese</ion-select-option>
-          <ion-select-option value="mexican">Mexican</ion-select-option>
-          <ion-select-option value="grill">Grill</ion-select-option>
-          <ion-select-option value="vegetarian"
-            >Vegetarian</ion-select-option
-          >
-          <ion-select-option value="chinese">Chinese</ion-select-option>
-        </ion-select>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label>Tags</ion-label>
 
-      </ion-item>
+          <ion-select
+            value="japanese"
+            multiple="true"
+            placeholder="Select Tags"
+          >
+            <ion-select-option value="japanese">Japanese</ion-select-option>
+            <ion-select-option value="mexican">Mexican</ion-select-option>
+            <ion-select-option value="grill">Grill</ion-select-option>
+            <ion-select-option value="vegetarian">Vegetarian</ion-select-option>
+            <ion-select-option value="chinese">Chinese</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col size="7">
+      <ion-col size="9">
         <ion-row>
-          <ion-text type="text" id="address" placeholder="Address">Address: {{restaurant.address.address}}</ion-text>
-          <ion-text type="text" id="city" placeholder="City">City: {{restaurant.address.city}}</ion-text>
+          <ion-col size="4"> Address: </ion-col>
+          <ion-col size="8">
+            {{restaurant.address.address}}<br />
+            {{restaurant.address.city}}, {{restaurant.address.province}}
+            {{restaurant.address.postal}}
+            <br *ngIf="!!restaurant.address.country" />
+            {{restaurant.address.country}}
+          </ion-col>
         </ion-row>
         <ion-row>
-          <ion-text type="text" id="country" >Country: {{restaurant.address.country}}</ion-text>
-          <ion-text
-          type="text"
-          id="province"
-          placeholder="Province/State"
-          >Province/State: {{restaurant.address.province}}</ion-text>
-          <ion-text type="tel" id="phone">Phone: {{restaurant.phone}}</ion-text>
+          <ion-col size="4"> Phone: </ion-col>
+          <ion-col size="8">{{restaurant.phone}}</ion-col>
         </ion-row>
-
       </ion-col>
-      <ion-col size="4">
+      <ion-col size="3">
         <ion-col size="6">
-
-          <ion-button routerLink="restaurant/:name/mapfs" routerDirection="root" >
-            <ion-icon name="call-outline"></ion-icon>
+          <ion-button (click)="callPlace(restaurant.phone)" shape="round">
+            <ion-icon name="call"></ion-icon>
           </ion-button>
         </ion-col>
 
         <ion-col size="6">
-
-          <ion-button *ngIf="restaurant"
-          [routerLink]="'/restaurant/' + restaurant.name + '/mapfs'"
+          <ion-button
+            *ngIf="restaurant"
+            shape="round"
+            [routerLink]="'/restaurant/' + restaurant.name + '/mapfs'"
           >
             <ion-icon name="locate-outline"></ion-icon>
           </ion-button>
         </ion-col>
-
-
       </ion-col>
-
-
-
-
     </ion-row>
     <ion-row>
-      <ion-item>
-        <ion-label position="floating">Notes</ion-label>
-        <ion-textarea disabled
-        readonly rows="4"></ion-textarea>
-      </ion-item>
+      <ion-col size="12">
+        <h4>Notes:</h4>
+        {{restaurant.notes}}
+      </ion-col>
     </ion-row>
   </ion-grid>
 
-
-
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="danger">
+      <ion-icon name="share"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button color="primary">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="secondary"
+        ><ion-icon name="logo-twitter"></ion-icon
+      ></ion-fab-button>
+      <ion-fab-button><ion-icon name="mail"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>

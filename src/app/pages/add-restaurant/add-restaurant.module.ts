@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AddRestaurantPage } from './add-restaurant.page';
 import { AddRestaurantPageRoutingModule } from './add-restaurant-routing.module';
+import { IonicRatingComponentModule } from 'ionic-rating-component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { AddRestaurantPageRoutingModule } from './add-restaurant-routing.module'
     CommonModule,
     FormsModule,
     AddRestaurantPageRoutingModule,
+    IonicRatingComponentModule,
   ],
   declarations: [AddRestaurantPage],
 })

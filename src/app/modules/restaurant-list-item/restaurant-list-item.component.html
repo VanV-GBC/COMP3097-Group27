@@ -1,12 +1,21 @@
-<ion-item
-  *ngIf="restaurant"
-  [routerLink]="'/restaurant/' + restaurant.name"
-  [detail]="false"
->
+<ion-item *ngIf="restaurant" [detail]="false">
   <ion-label class="ion-text-wrap">
-    <h2>
+    <h2 [routerLink]="'/restaurant/' + restaurant.name">
       {{ restaurant.name }}
     </h2>
-    <h3>Rating: {{ restaurant.rating }}</h3>
+    <ionic-rating-component
+      #rating
+      activeIcon="star"
+      defaultIcon="star-outline"
+      halfIcon="star-half"
+      halfStar="true"
+      activeColor="#dbb04a"
+      defaultColor="#dbb04a"
+      readonly="false"
+      rating="{{ restaurant.rating }}"
+      fontSize="20px"
+      (ratingChanged)="onRatingChange($event)"
+    >
+    </ionic-rating-component>
   </ion-label>
 </ion-item>

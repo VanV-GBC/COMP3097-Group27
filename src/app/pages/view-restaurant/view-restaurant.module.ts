@@ -9,6 +9,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { ViewRestaurantPageRoutingModule } from './view-restaurant-routing.module';
 import { ViewRestaurantPage } from './view-restaurant.page';
+import { IonicRatingComponentModule } from 'ionic-rating-component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -17,10 +19,8 @@ import { ViewRestaurantPage } from './view-restaurant.page';
     IonicModule,
     ViewRestaurantPageRoutingModule,
     MapPartialModule,
+    IonicRatingComponentModule,
   ],
-  declarations: [
-    ViewRestaurantPage,
-    MapPartialComponent
-  ],
+  declarations: [ViewRestaurantPage, MapPartialComponent],
 })
 export class ViewRestaurantPageModule {}

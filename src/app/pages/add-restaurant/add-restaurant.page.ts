@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AddRestaurantPage {
   constructor() {}
+
+  onRatingChange(rating) {
+    console.log('The evaluation was modified and now its value is: ', rating);
+    // do your stuff
+  }
 }

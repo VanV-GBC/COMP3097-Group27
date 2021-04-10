@@ -14,7 +14,6 @@
           placeholder="Restaurant Name"
         ></ion-input>
         <ion-input type="text" id="address" placeholder="Address"></ion-input>
-        <ion-input type="text" id="country" placeholder="Country"></ion-input>
         <ion-row>
           <ion-col size="6">
             <ion-input type="text" id="city" placeholder="City"></ion-input>
@@ -27,40 +26,61 @@
             ></ion-input>
           </ion-col>
         </ion-row>
-        <ion-input type="tel" id="phone" placeholder="Phone"></ion-input>
         <ion-row>
           <ion-col size="6">
             <ion-input
-              type="number"
-              id="rating"
-              placeholder="Rating"
-              max="5"
-              min="0"
-              value="0"
+              type="text"
+              id="country"
+              placeholder="Country"
             ></ion-input>
           </ion-col>
           <ion-col size="6">
-            <ion-item>
-              <ion-label>Tags</ion-label>
-              <ion-select
-                value="japanese"
-                multiple="true"
-                placeholder="Select Tags"
-              >
-                <ion-select-option value="japanese">Japanese</ion-select-option>
-                <ion-select-option value="mexican">Mexican</ion-select-option>
-                <ion-select-option value="grill">Grill</ion-select-option>
-                <ion-select-option value="vegetarian"
-                  >Vegetarian</ion-select-option
-                >
-                <ion-select-option value="chinese">Chinese</ion-select-option>
-              </ion-select>
-            </ion-item>
+            <ion-input
+              type="text"
+              id="postal"
+              placeholder="Postal/Zip Code"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-input type="tel" id="phone" placeholder="Phone"></ion-input>
+          </ion-col>
+          <ion-col size="6">
+            <ionic-rating-component
+              #rating
+              activeIcon="star"
+              defaultIcon="star-outline"
+              halfIcon="star-half"
+              halfStar="true"
+              activeColor="#dbb04a"
+              defaultColor="#dbb04a"
+              readonly="false"
+              rating="5"
+              fontSize="20px"
+              (ratingChanged)="onRatingChange($event)"
+            >
+            </ionic-rating-component>
           </ion-col>
         </ion-row>
         <ion-item>
+          <ion-label>Tags</ion-label>
+          <ion-select
+            value="japanese"
+            multiple="true"
+            placeholder="Select Tags"
+          >
+            <ion-select-option value="japanese">Japanese</ion-select-option>
+            <ion-select-option value="mexican">Mexican</ion-select-option>
+            <ion-select-option value="grill">Grill</ion-select-option>
+            <ion-select-option value="vegetarian">Vegetarian</ion-select-option>
+            <ion-select-option value="chinese">Chinese</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
           <ion-label position="floating">Notes</ion-label>
-          <ion-textarea rows="6"></ion-textarea>
+          <ion-textarea rows="8"></ion-textarea>
         </ion-item>
         <ion-button expand="block" fill="solid" shape="round">
           <ion-icon slot="start" name="save"></ion-icon> Save

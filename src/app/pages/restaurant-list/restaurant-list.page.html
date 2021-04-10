@@ -11,7 +11,7 @@
         <ion-col size="6">
           <ion-item>
             <ion-label>Sort By</ion-label>
-            <ion-select value="name" multiple="false">
+            <ion-select value="name" multiple="false" class="sort-by-dropdown">
               <ion-select-option value="name">Name</ion-select-option>
               <ion-select-option value="rating">Rating</ion-select-option>
               <ion-select-option value="proximity">Proximity</ion-select-option>
@@ -41,7 +41,8 @@
           <app-restaurant-list-item
             *ngFor="let restaurant of getRestaurants()"
             [restaurant]="restaurant"
-          ></app-restaurant-list-item>
+          >
+          </app-restaurant-list-item>
         </ion-list>
       </ion-col>
     </ion-row>
