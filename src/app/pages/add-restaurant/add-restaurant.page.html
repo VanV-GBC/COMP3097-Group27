@@ -11,30 +11,38 @@
         <ion-input
           type="text"
           id="name"
+          required
           placeholder="Restaurant Name"
           [(ngModel)]="restaurant.name"
+          name="name"
         ></ion-input>
         <ion-input
           type="text"
-          id="address"
-          placeholder="Address"
-          [(ngModel)]="restaurant.address.address"
+          id="street"
+          required
+          placeholder="Street Address"
+          [(ngModel)]="restaurant.address.street"
+          name="address.street"
         ></ion-input>
         <ion-row>
           <ion-col size="6">
             <ion-input
               type="text"
               id="city"
+              required
               placeholder="City"
               [(ngModel)]="restaurant.address.city"
+              name="address.city"
             ></ion-input>
           </ion-col>
           <ion-col size="6">
             <ion-input
               type="text"
               id="province"
+              required
               placeholder="Province/State"
               [(ngModel)]="restaurant.address.province"
+              name="address.province"
             ></ion-input>
           </ion-col>
         </ion-row>
@@ -45,6 +53,7 @@
               id="country"
               placeholder="Country"
               [(ngModel)]="restaurant.address.country"
+              name="address.country"
             ></ion-input>
           </ion-col>
           <ion-col size="6">
@@ -53,6 +62,7 @@
               id="postal"
               placeholder="Postal/Zip Code"
               [(ngModel)]="restaurant.address.postal"
+              name="address.postal"
             ></ion-input>
           </ion-col>
         </ion-row>
@@ -64,6 +74,7 @@
               id="phone"
               placeholder="Phone"
               [(ngModel)]="restaurant.phone"
+              name="phone"
             ></ion-input>
           </ion-col>
           <ion-col size="6">
@@ -80,6 +91,7 @@
               rating="0"
               fontSize="20px"
               [(ngModel)]="restaurant.rating"
+              name="rating"
               (ratingChanged)="onRatingChange($event)"
             >
             </ionic-rating-component>
@@ -92,6 +104,7 @@
             id="tags"
             placeholder="Select Tags"
             [(ngModel)]="restaurant.tags"
+            name="tags"
           >
             <ion-select-option value="1">Japanese</ion-select-option>
             <ion-select-option value="2">Mexican</ion-select-option>
@@ -106,6 +119,7 @@
             id="notes"
             rows="8"
             [(ngModel)]="restaurant.notes"
+            name="notes"
           ></ion-textarea>
         </ion-item>
         <ion-button

@@ -25,7 +25,7 @@ export class AddRestaurantPage {
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.restaurant = this.data.getRestaurantById(id);
-    if (this.restaurant.id !== '') {
+    if (this.restaurant && this.restaurant.id !== '') {
       this.pageTitle = 'Edit';
       this.isAdd = false;
     }

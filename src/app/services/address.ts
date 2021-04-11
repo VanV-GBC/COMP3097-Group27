@@ -1,10 +1,10 @@
 export class Address {
   constructor() {
-    this.address = '';
+    this.street = '';
     this.city = '';
     this.province = '';
   }
-  address: string;
+  street: string;
   city: string;
   province: string;
   postal?: string;
