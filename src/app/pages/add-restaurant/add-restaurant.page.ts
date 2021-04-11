@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Restaurant } from '../../services/restaurant';
 import { DataService } from '../../services/data.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-restaurant',
@@ -15,7 +16,8 @@ export class AddRestaurantPage {
   constructor(
     private data: DataService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    public alertController: AlertController
   ) {
     this.restaurant = JSON.parse(JSON.stringify(this._emptyRestaurant));
   }
@@ -49,12 +51,36 @@ export class AddRestaurantPage {
     this.restaurant = JSON.parse(JSON.stringify(this._emptyRestaurant));
     this.router.navigate(['/tabs/restaurant-list']);
   }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Confirm Deletioins',
+      message: `Are you sure you want to delete ${this.restaurant.name}?`,
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            this.restaurant = JSON.parse(JSON.stringify(this._emptyRestaurant));
+            this.router.navigate(['/tabs/restaurant-list']);
+          },
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            if (!this.isAdd) {
+              this.data.deleteRestaurant(this.restaurant);
+            }
+            this.restaurant = JSON.parse(JSON.stringify(this._emptyRestaurant));
+            this.router.navigate(['/tabs/restaurant-list']);
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
   onDelete() {
-    if (!this.isAdd) {
-      this.data.deleteRestaurant(this.restaurant);
-    }
-    this.restaurant = JSON.parse(JSON.stringify(this._emptyRestaurant));
-    this.router.navigate(['/tabs/restaurant-list']);
+    this.presentAlertConfirm();
   }
 
   onRatingChange(rating) {
