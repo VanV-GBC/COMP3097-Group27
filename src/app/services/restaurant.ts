@@ -1,5 +1,10 @@
 import { Address } from './address';
-export interface Restaurant {
+export class Restaurant {
+  constructor() {
+    this.id = '';
+    this.name = '';
+    this.address = new Address();
+  }
   id: string;
   name: string;
   rating?: number;

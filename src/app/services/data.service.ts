@@ -24,6 +24,7 @@ export class DataService {
     this.db
       .get(this._restaurantsStorageKey)
       .then((res) => {
+        console.log(res);
         if (res !== null) {
           this.restaurants = res;
         } else if (res === null) {

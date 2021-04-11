@@ -1,5 +1,5 @@
+import { Restaurant } from './../../services/restaurant';
 import { Component } from '@angular/core';
-import { Restaurant } from '../../services/restaurant';
 import { DataService } from '../../services/data.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -10,7 +10,7 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['add-restaurant.page.scss'],
 })
 export class AddRestaurantPage {
-  restaurant: Restaurant;
+  restaurant: Restaurant = new Restaurant();
   pageTitle: string = 'Add';
   isAdd: boolean = true;
   constructor(
@@ -19,7 +19,7 @@ export class AddRestaurantPage {
     private activatedRoute: ActivatedRoute,
     public alertController: AlertController
   ) {
-    this.restaurant = JSON.parse(JSON.stringify(this._emptyRestaurant));
+    this.restaurant = new Restaurant();
   }
 
   ngOnInit() {
@@ -32,23 +32,13 @@ export class AddRestaurantPage {
     console.log(this.data.getRestaurantById(id));
   }
 
-  private _emptyRestaurant: Restaurant = {
-    id: '',
-    name: '',
-    address: {
-      address: '',
-      city: '',
-      province: '',
-    },
-  };
-
   onSave() {
     if (this.isAdd) {
       this.data.addRestaurant(this.restaurant);
     } else {
       this.data.updateRestaurant(this.restaurant);
     }
-    this.restaurant = JSON.parse(JSON.stringify(this._emptyRestaurant));
+    this.restaurant = new Restaurant();
     this.router.navigate(['/tabs/restaurant-list']);
   }
 
@@ -60,7 +50,7 @@ export class AddRestaurantPage {
         {
           text: 'Cancel',
           handler: () => {
-            this.restaurant = JSON.parse(JSON.stringify(this._emptyRestaurant));
+            this.restaurant = new Restaurant();
             this.router.navigate(['/tabs/restaurant-list']);
           },
         },
@@ -70,7 +60,7 @@ export class AddRestaurantPage {
             if (!this.isAdd) {
               this.data.deleteRestaurant(this.restaurant);
             }
-            this.restaurant = JSON.parse(JSON.stringify(this._emptyRestaurant));
+            this.restaurant = new Restaurant();
             this.router.navigate(['/tabs/restaurant-list']);
           },
         },
