@@ -31,8 +31,8 @@ export class ViewRestaurantPage implements OnInit {
     return mode === 'ios' ? 'Back' : '';
   }
   onRatingChange(rating) {
-    console.log('The evaluation was modified and now its value is: ', rating);
-    // do your stuff
+    this.restaurant.rating = rating;
+    this.data.updateRestaurant(this.restaurant);
   }
 
   callPlace(number: string) {
