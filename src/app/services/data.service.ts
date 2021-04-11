@@ -1,34 +1,14 @@
 import { Injectable } from '@angular/core';
-
-export interface Tag {
-  name: string;
-  id: number;
-}
-
-export interface Address {
-  address: string;
-  city: string;
-  province: string;
-  postal?: string;
-  country?: string;
-  lat?: number;
-  lon?: number;
-}
-
-export interface Restaurant {
-  name: string;
-  rating?: number;
-  address: Address;
-  tags?: number[];
-  phone?: string;
-  notes?: string;
-}
+import { DbService } from './db.service';
+import { Restaurant } from './restaurant';
+import { ToastController } from '@ionic/angular';
+import { Tag } from './tag';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  public tags: Tag[] = [
+  private dummyTagData: Tag[] = [
     { id: 1, name: 'Japanese' },
     { id: 2, name: 'Mexican' },
     { id: 3, name: 'Chinese' },
@@ -40,8 +20,9 @@ export class DataService {
     { id: 9, name: 'Quick Bite' },
   ];
 
-  public restaurants: Restaurant[] = [
+  private dummyRestaurantData: Restaurant[] = [
     {
+      id: 1,
       name: 'Cluck Clucks Chicken & Waffles',
       rating: 5,
       notes: 'Amazing chicken for good price.',
@@ -55,6 +36,7 @@ export class DataService {
       tags: [7, 8],
     },
     {
+      id: 2,
       name: 'Bier Markt',
       rating: 4.5,
       notes: 'Great beer selection and ok food',
@@ -68,6 +50,7 @@ export class DataService {
       tags: [6, 9],
     },
     {
+      id: 3,
       name: 'HOTHOUSE',
       rating: 2.5,
       notes:
@@ -80,7 +63,23 @@ export class DataService {
     },
   ];
 
-  constructor() {}
+  private tags: Tag[] = [];
+  private restaurants: Restaurant[] = [];
+
+  constructor(private db: DbService, private toast: ToastController) {}
+
+  ngOnInit() {
+    this.db.dbState().subscribe((res) => {
+      if (res) {
+        this.db.fetchTags().subscribe((item) => {
+          this.tags = item;
+        });
+        this.db.fetchRestaurants().subscribe((item) => {
+          this.restaurants = item;
+        });
+      }
+    });
+  }
 
   public getRestaurants(): Restaurant[] {
     return this.restaurants;
