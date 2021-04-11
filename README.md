@@ -32,13 +32,15 @@
 - Add a splash page
 - Add search ability
 - Fix issue with data not persisting in storage
-- Fix tag fields to load from DB
 - Fix how phone # is displayed and show on input
 - Figure out how to sort by proximity
 - Make current position of a person available in the rest of the app for sorting by proximity
 - Get lat/lon of places based on API for sorting by proximity
+- Fix any things noted by prof in Prototype 2 that are not on the list above
+
+#### Other Considerations
+
 - Consider storing one tag/restaurant in one key not all tags/restaurants in just 2 keys
 - See if any other UI improvements can be made
 - See if it make sense to add list of countries/provinces to pick from
 - UI Consideration: chips for tags https://ionicframework.com/docs/api/chip
-- Fix any things noted by prof in Prototype 2 that are not on the list above
