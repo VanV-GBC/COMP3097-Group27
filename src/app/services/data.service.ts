@@ -78,12 +78,72 @@ export class DataService {
           this.restaurants = item;
         });
         if (this.restaurants.length == 0) {
-          this.restaurants = this.dummyRestaurantData;
+          this.db.addRestaurant(this.dummyRestaurantData[0]);
         }
         if (this.tags.length == 0) {
           this.tags = this.dummyRestaurantData;
         }
       }
+    });
+  }
+
+  addRestaurant(r: Restaurant) {
+    this.db.addRestaurant(r).then(async (res) => {
+      let toast = await this.toast.create({
+        message: `Restaurant ${r.name} added!`,
+        duration: 1500,
+      });
+      toast.present();
+    });
+  }
+
+  deleteRestaurant(id: number) {
+    this.db.deleteRestaurant(id).then(async (res) => {
+      let toast = await this.toast.create({
+        message: 'Restaurant deleted!',
+        duration: 1500,
+      });
+      toast.present();
+    });
+  }
+
+  updateRestaurant(r: Restaurant) {
+    this.db.updateRestaurant(r).then(async (res) => {
+      let toast = await this.toast.create({
+        message: 'Restaurant updated!',
+        duration: 1500,
+      });
+      toast.present();
+    });
+  }
+
+  addTag(t: Tag) {
+    this.db.addTag(t.name).then(async (res) => {
+      let toast = await this.toast.create({
+        message: 'Tag added!',
+        duration: 1500,
+      });
+      toast.present();
+    });
+  }
+
+  deleteTag(id: number) {
+    this.db.deleteTag(id).then(async (res) => {
+      let toast = await this.toast.create({
+        message: 'Tag deleted!',
+        duration: 1500,
+      });
+      toast.present();
+    });
+  }
+
+  updateTag(t: Tag) {
+    this.db.updateTag(t).then(async (res) => {
+      let toast = await this.toast.create({
+        message: 'Tag updated!',
+        duration: 1500,
+      });
+      toast.present();
     });
   }
 

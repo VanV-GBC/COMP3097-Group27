@@ -10,11 +10,11 @@
 - ~~Add DB Connector Layer~~ (DONE)
 - ~~Implement data access layer~~ (DONE)
 - ~~Add ability to call the place~~ (DONE)
+- ~~Add Toast messages on changes~~ (DONE)
+- ~~Add ability to add places~~ (DONE)
 - Add dummy data to db if DB is empty
-- Add ability to add places
 - Add ability to edit places
 - Add ability to delete places
-- Add Toast messages on changes
 - Fix map in `view-restaurant` to show location
 - Fix full screen map
 - Add navigation feature to full screen map
@@ -22,12 +22,17 @@
 
 #### Final Version
 
+- Add ability to add/remove/edit tags
 - Add search ability
-- Add sorting capability
+- Add confirmation on delete
 - Add form validation
 - Add Ability to share places on Facebook, Twitter and over email
-- Add form validation
 - Add a splash page
+- Fix ability to update rating everywhere
+- Fix tag fields to load from DB
+- Fix ability to add tags
+- Fix sorting capability
 - See if any other UI improvements can be made
+- See if it make sense to add list of countries/provinces to pick from
 - UI Consideration: chips for tags https://ionicframework.com/docs/api/chip
 - Fix any things noted by prof in Prototype 2

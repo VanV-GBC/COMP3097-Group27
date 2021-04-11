@@ -4,6 +4,7 @@ import { Restaurant } from './restaurant';
 import { Tag } from './tag';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,11 @@ export class DbService {
   restaurantList = new BehaviorSubject([]);
   private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  constructor(private platform: Platform, private sqlite: SQLite) {
+  constructor(
+    private platform: Platform,
+    private sqlite: SQLite,
+    private toast: ToastController
+  ) {
     this.platform
       .ready()
       .then(() => {
@@ -47,18 +52,6 @@ export class DbService {
   async createTables() {
     this.storage
       .executeSql(
-        `CREATE TABLE IF NOT EXISTS tags(
-      id INTEGER PRIMARY KEY,
-      name TEXT
-    )`,
-        []
-      )
-      .then((_) => {
-        this.getTags();
-        this.isDbReady.next(true);
-      });
-    this.storage
-      .executeSql(
         `CREATE TABLE IF NOT EXISTS restaurants(
           id INTEGER PRIMARY KEY,
           name TEXT,
@@ -72,18 +65,30 @@ export class DbService {
           postal TEXT,
           country TEXT,
           lat FLOAT,
-          lon FLOAT,
-          )`,
+          lon FLOAT
+        )`,
         []
       )
       .then((_) => {
         this.getRestaurants();
         this.isDbReady.next(true);
       });
+    this.storage
+      .executeSql(
+        `CREATE TABLE IF NOT EXISTS tags(
+          id INTEGER PRIMARY KEY,
+          name TEXT
+        )`,
+        []
+      )
+      .then((_) => {
+        this.getTags();
+        this.isDbReady.next(true);
+      });
   }
 
   getTags() {
-    return this.storage.executeSql('SELECT * FROM tags', []).then((res) => {
+    return this.storage.executeSql(`SELECT * FROM tags`, []).then((res) => {
       let items: Tag[] = [];
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) {
@@ -112,7 +117,7 @@ export class DbService {
 
   getRestaurants() {
     return this.storage
-      .executeSql('SELECT * FROM restaurants', [])
+      .executeSql(`SELECT * FROM restaurants`, [])
       .then((res) => {
         let items: Restaurant[] = [];
         if (res.rows.length > 0) {
@@ -143,7 +148,16 @@ export class DbService {
   addTag(name: string) {
     let data = [name];
     return this.storage
-      .executeSql('INSERT INTO tags (name) VALUES (?)', data)
+      .executeSql(`INSERT INTO tags (name) VALUES (?)`, data)
+      .then((res) => {
+        this.getTags();
+      });
+  }
+
+  updateTag(tag: Tag) {
+    let data = [tag.name, tag.id];
+    return this.storage
+      .executeSql(`UPDATE tags SET name = ? WHERE id = ?`, data)
       .then((res) => {
         this.getTags();
       });
@@ -200,9 +214,48 @@ export class DbService {
       });
   }
 
+  updateRestaurant(r: Restaurant) {
+    let data = [
+      r.name,
+      r.rating,
+      r.phone,
+      r.notes,
+      this.storeTagsToString(r.tags),
+      r.address.address,
+      r.address.city,
+      r.address.province,
+      r.address.postal,
+      r.address.country,
+      r.address.lat,
+      r.address.lon,
+      r.id,
+    ];
+    return this.storage
+      .executeSql(
+        `UPDATE restaurants SET 
+        name = ?,
+        rating = ?,
+        phone = ?,
+        notes = ?,
+        tags = ?,
+        address = ?,
+        city = ?,
+        province = ?,
+        postal = ?,
+        country = ?,
+        lat = ?,
+        lon = ?,
+        WHERE id = ?`,
+        data
+      )
+      .then((res) => {
+        this.getRestaurants();
+      });
+  }
+
   deleteTag(id: number) {
     return this.storage
-      .executeSql('DELETE FROM tags WHERE id = ?', [id])
+      .executeSql(`DELETE FROM tags WHERE id = ?`, [id])
       .then((res) => {
         this.getTags();
       });
@@ -210,7 +263,7 @@ export class DbService {
 
   deleteRestaurant(id: number) {
     return this.storage
-      .executeSql('DELETE FROM restaurants WHERE id = ?', [id])
+      .executeSql(`DELETE FROM restaurants WHERE id = ?`, [id])
       .then((res) => {
         this.getRestaurants();
       });

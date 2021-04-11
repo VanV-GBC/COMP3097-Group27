@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Restaurant } from '../../services/restaurant';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-add-restaurant',
@@ -6,10 +8,23 @@ import { Component } from '@angular/core';
   styleUrls: ['add-restaurant.page.scss'],
 })
 export class AddRestaurantPage {
-  constructor() {}
+  constructor(private data: DataService) {}
+
+  restaurant: Restaurant = {
+    id: 0,
+    name: '',
+    address: {
+      address: '',
+      city: '',
+      province: '',
+    },
+  };
+
+  onSave() {
+    this.data.addRestaurant(this.restaurant);
+  }
 
   onRatingChange(rating) {
-    console.log('The evaluation was modified and now its value is: ', rating);
-    // do your stuff
+    this.restaurant.rating = rating;
   }
 }
