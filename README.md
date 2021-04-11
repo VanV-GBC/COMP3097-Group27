@@ -11,14 +11,14 @@
 - ~~Implement data access layer~~ (DONE)
 - ~~Add ability to call the place~~ (DONE)
 - Add dummy data to db if DB is empty
-- Fix map in `view-restaurant` to show location
-- Fix full screen map
-- Add navigation feature to full screen map
-- Allow calling a place or canceling navigation while driving feature to full screen map
 - Add ability to add places
 - Add ability to edit places
 - Add ability to delete places
 - Add Toast messages on changes
+- Fix map in `view-restaurant` to show location
+- Fix full screen map
+- Add navigation feature to full screen map
+- Allow calling a place or canceling navigation while driving feature to full screen map
 
 #### Final Version
 
