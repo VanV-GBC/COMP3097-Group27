@@ -1,6 +1,6 @@
-<ion-item *ngIf="restaurant" [detail]="false">
+<ion-item *ngIf="!!restaurant.id" [detail]="false">
   <ion-label class="ion-text-wrap">
-    <h2 [routerLink]="'/restaurant/' + restaurant.name">
+    <h2 [routerLink]="'/restaurant/' + restaurant.id">
       {{ restaurant.name }}
     </h2>
     <ionic-rating-component

@@ -1,3 +1,4 @@
+import { DummyData } from './dummy-data';
 import { Injectable } from '@angular/core';
 import { DbService } from './db.service';
 import { Restaurant } from './restaurant';
@@ -8,150 +9,172 @@ import { Tag } from './tag';
   providedIn: 'root',
 })
 export class DataService {
-  private dummyTagData: Tag[] = [
-    { id: 1, name: 'Japanese' },
-    { id: 2, name: 'Mexican' },
-    { id: 3, name: 'Chinese' },
-    { id: 4, name: 'Grill' },
-    { id: 5, name: 'Vegetarian' },
-    { id: 6, name: 'Beer' },
-    { id: 7, name: 'Chicken' },
-    { id: 8, name: 'Sit Down Place' },
-    { id: 9, name: 'Quick Bite' },
-  ];
+  public tags: Tag[] = [];
+  public restaurants: Restaurant[] = [];
+  private _tagsStorageKey: string = 'tags_storage';
+  private _restaurantsStorageKey: string = 'restaurants_storage';
+  private _dummyData: DummyData = new DummyData();
 
-  private dummyRestaurantData: Restaurant[] = [
-    {
-      id: 1,
-      name: 'Cluck Clucks Chicken & Waffles',
-      rating: 5,
-      notes: 'Amazing chicken for good price.',
-      phone: '6477482582',
-      address: {
-        address: '222 The Esplanade',
-        city: 'Toronto',
-        province: 'ON',
-        postal: 'M5A 4M8',
-      },
-      tags: [7, 8],
-    },
-    {
-      id: 2,
-      name: 'Bier Markt',
-      rating: 4.5,
-      notes: 'Great beer selection and ok food',
-      phone: '4168627575',
-      address: {
-        address: '58 The Esplanade',
-        city: 'Toronto',
-        province: 'ON',
-        postal: 'M5E 1A6',
-      },
-      tags: [6, 9],
-    },
-    {
-      id: 3,
-      name: 'HOTHOUSE',
-      rating: 2.5,
-      notes:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pellentesque augue felis, sit amet convallis quam consequat sed. Duis non bibendum neque. Sed rutrum orci quis mollis tristique. Nullam accumsan rhoncus tellus, vitae viverra eros dapibus volutpat. Cras est augue, ornare feugiat semper nec, blandit sed ex. Nullam et suscipit leo. Cras quis lacinia mauris. \nDuis malesuada iaculis pellentesque. Vestibulum mauris felis, ultricies in odio eget, feugiat dictum ex. Vestibulum posuere malesuada lectus ut finibus. Aliquam porta cursus nunc, dictum interdum nulla mollis nec. Praesent sit amet vulputate risus, ut commodo ex. Nulla vulputate nec arcu vel imperdiet. Curabitur egestas viverra nunc, at mollis lacus pretium at. Phasellus lorem ante, pretium ut congue sed, hendrerit ac nisl. Nam euismod justo scelerisque, consequat enim laoreet, fringilla odio. Phasellus vulputate dui id nibh ullamcorper ullamcorper.',
-      address: {
-        address: '35 Church St',
-        city: 'Toronto',
-        province: 'ON',
-      },
-    },
-  ];
+  constructor(private db: DbService, private toast: ToastController) {
+    this.getRestaurants();
+    this.getTags();
+  }
 
-  private tags: Tag[] = [];
-  private restaurants: Restaurant[] = [];
-
-  constructor(private db: DbService, private toast: ToastController) {}
-
-  ngOnInit() {
-    this.db.dbState().subscribe((res) => {
-      if (res) {
-        this.db.fetchTags().subscribe((item) => {
-          this.tags = item;
-        });
-        this.db.fetchRestaurants().subscribe((item) => {
-          this.restaurants = item;
-        });
-        if (this.restaurants.length == 0) {
-          this.db.addRestaurant(this.dummyRestaurantData[0]);
+  private getRestaurants() {
+    this.db
+      .get(this._restaurantsStorageKey)
+      .then((res) => {
+        if (res !== null) {
+          this.restaurants = res;
+        } else if (res === null) {
+          this.restaurants = this._dummyData.getRestaurants();
+          this.db
+            .set(this._restaurantsStorageKey, this.restaurants)
+            .then(async (res) => {
+              let toast = await this.toast.create({
+                message: `Sample data added!`,
+                duration: 1000,
+              });
+              toast.present();
+            })
+            .catch((e) => console.log(e));
         }
-        if (this.tags.length == 0) {
-          this.tags = this.dummyRestaurantData;
+      })
+      .catch((e) => console.log(e));
+  }
+
+  private getTags() {
+    this.db
+      .get(this._tagsStorageKey)
+      .then((res) => {
+        if (res !== null) {
+          this.tags = res;
+        } else if (res === null) {
+          this.tags = this._dummyData.getTags();
+          this.db
+            .set(this._tagsStorageKey, this.tags)
+            .then(async (res) => {
+              let toast = await this.toast.create({
+                message: `Sample data added!`,
+                duration: 1000,
+              });
+              toast.present();
+            })
+            .catch((e) => console.log(e));
         }
-      }
-    });
+      })
+      .catch((e) => console.log(e));
   }
 
-  addRestaurant(r: Restaurant) {
-    this.db.addRestaurant(r).then(async (res) => {
-      let toast = await this.toast.create({
-        message: `Restaurant ${r.name} added!`,
-        duration: 1500,
-      });
-      toast.present();
-    });
+  ngOnInit() {}
+
+  private randId(size: number = 10) {
+    const nums = Array.from({ length: 10 }, (_, i) =>
+      String.fromCharCode('0'.charCodeAt(0) + i)
+    );
+    const alphabets = Array.from({ length: 26 }, (_, i) =>
+      String.fromCharCode('a'.charCodeAt(0) + i)
+    );
+    const chars = [...nums, ...alphabets];
+    const rand = (length) => Math.floor(Math.random() * length);
+    return Array.from({ length: size }, () => chars[rand(chars.length)]).join(
+      ''
+    );
   }
 
-  deleteRestaurant(id: number) {
-    this.db.deleteRestaurant(id).then(async (res) => {
-      let toast = await this.toast.create({
-        message: 'Restaurant deleted!',
-        duration: 1500,
-      });
-      toast.present();
-    });
+  private generateUniqueId(arr: Array<any>) {
+    let uniqueId = this.randId();
+    while (arr.findIndex((i) => i.id === uniqueId) !== -1) {
+      uniqueId = this.randId();
+    }
+    return uniqueId;
   }
 
-  updateRestaurant(r: Restaurant) {
-    this.db.updateRestaurant(r).then(async (res) => {
-      let toast = await this.toast.create({
-        message: 'Restaurant updated!',
-        duration: 1500,
-      });
-      toast.present();
-    });
+  private findItemById(arr: Array<any>, id: string) {
+    const index = arr.findIndex((i) => i.id === id);
+    return index;
   }
 
-  addTag(t: Tag) {
-    this.db.addTag(t.name).then(async (res) => {
-      let toast = await this.toast.create({
-        message: 'Tag added!',
-        duration: 1500,
-      });
-      toast.present();
-    });
+  private updateStorage(key: string, data: any, message: string) {
+    this.db
+      .set(key, data)
+      .then(async (res) => {
+        let toast = await this.toast.create({
+          message: message,
+          duration: 1500,
+        });
+        toast.present();
+      })
+      .catch((e) => console.log(e));
   }
 
-  deleteTag(id: number) {
-    this.db.deleteTag(id).then(async (res) => {
-      let toast = await this.toast.create({
-        message: 'Tag deleted!',
-        duration: 1500,
-      });
-      toast.present();
-    });
+  public addRestaurant(r: Restaurant) {
+    const uid = this.generateUniqueId(this.restaurants);
+    r.id = uid;
+    this.restaurants.push(r);
+    this.updateStorage(
+      this._restaurantsStorageKey,
+      this.restaurants,
+      `Restaurant ${r.name} added!`
+    );
   }
 
-  updateTag(t: Tag) {
-    this.db.updateTag(t).then(async (res) => {
-      let toast = await this.toast.create({
-        message: 'Tag updated!',
-        duration: 1500,
-      });
-      toast.present();
-    });
+  public updateRestaurant(r: Restaurant) {
+    const idx = this.findItemById(this.restaurants, r.id);
+    if (idx !== -1) {
+      this.restaurants[idx] = r;
+      this.updateStorage(
+        this._restaurantsStorageKey,
+        this.restaurants,
+        `Restaurant ${r.name} updated!`
+      );
+    }
   }
 
-  public getRestaurants(): Restaurant[] {
-    return this.restaurants;
+  public deleteRestaurant(r: Restaurant) {
+    const idx = this.findItemById(this.restaurants, r.id);
+    if (idx !== -1) {
+      this.restaurants.splice(idx, 1);
+      this.updateStorage(
+        this._restaurantsStorageKey,
+        this.restaurants,
+        `Restaurant ${r.name} was deleted!`
+      );
+    }
   }
 
-  public getRestaurantByName(name: string): Restaurant {
-    return this.restaurants.find((i) => i.name == name);
+  public addTag(t: Tag) {
+    const uid = this.generateUniqueId(this.tags);
+    t.id = uid;
+    this.tags.push(t);
+    this.updateStorage(this._tagsStorageKey, this.tags, `Tag ${t.name} added!`);
+  }
+
+  public updateTag(t: Tag) {
+    const idx = this.findItemById(this.tags, t.id);
+    if (idx !== -1) {
+      this.tags[idx] = t;
+      this.updateStorage(
+        this._tagsStorageKey,
+        this.tags,
+        `Tag ${t.name} updated!`
+      );
+    }
+  }
+
+  public deleteTag(t: Tag) {
+    const idx = this.findItemById(this.tags, t.id);
+    if (idx !== -1) {
+      this.tags.splice(idx, 1);
+      this.updateStorage(
+        this._tagsStorageKey,
+        this.tags,
+        `Tag ${t.name} was deleted!`
+      );
+    }
+  }
+
+  public getRestaurantById(id: string): Restaurant {
+    return this.restaurants.find((i) => i.id === id);
   }
 }

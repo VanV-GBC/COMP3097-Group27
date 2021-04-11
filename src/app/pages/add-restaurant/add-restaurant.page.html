@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Add Restaurant </ion-title>
+    <ion-title> {{pageTitle}} Restaurant </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -69,6 +69,7 @@
           <ion-col size="6">
             <ionic-rating-component
               #rating
+              id="rating"
               activeIcon="star"
               defaultIcon="star-outline"
               halfIcon="star-half"
@@ -78,6 +79,7 @@
               readonly="false"
               rating="0"
               fontSize="20px"
+              [(ngModel)]="restaurant.rating"
               (ratingChanged)="onRatingChange($event)"
             >
             </ionic-rating-component>
@@ -86,8 +88,8 @@
         <ion-item>
           <ion-label>Tags</ion-label>
           <ion-select
-            value="japanese"
             multiple="true"
+            id="tags"
             placeholder="Select Tags"
             [(ngModel)]="restaurant.tags"
           >
@@ -99,10 +101,12 @@
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-label position="floating" [(ngModel)]="restaurant.notes"
-            >Notes</ion-label
-          >
-          <ion-textarea rows="8"></ion-textarea>
+          <ion-label position="floating">Notes</ion-label>
+          <ion-textarea
+            id="notes"
+            rows="8"
+            [(ngModel)]="restaurant.notes"
+          ></ion-textarea>
         </ion-item>
         <ion-button
           expand="block"
@@ -111,6 +115,16 @@
           (click)="onSave()"
         >
           <ion-icon slot="start" name="save"></ion-icon> Save
+        </ion-button>
+        <ion-button
+          *ngIf="!isAdd"
+          expand="block"
+          color="danger"
+          fill="solid"
+          shape="round"
+          (click)="onDelete()"
+        >
+          <ion-icon slot="start" name="trash"></ion-icon> Delete
         </ion-button>
       </ion-col>
     </ion-row>

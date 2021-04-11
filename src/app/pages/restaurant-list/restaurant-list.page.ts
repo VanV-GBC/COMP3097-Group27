@@ -17,6 +17,6 @@ export class RestaurantListPage {
   }
 
   getRestaurants(): Restaurant[] {
-    return this.data.getRestaurants();
+    return this.data.restaurants;
   }
 }

@@ -12,9 +12,10 @@
 - ~~Add ability to call the place~~ (DONE)
 - ~~Add Toast messages on changes~~ (DONE)
 - ~~Add ability to add places~~ (DONE)
-- Add dummy data to db if DB is empty
-- Add ability to edit places
-- Add ability to delete places
+- ~~Add dummy data to db if DB is empty~~ (DONE)
+- ~~Add ability to edit places~~ (DONE)
+- ~~Add ability to delete places~~ (DONE)
+- Fix issue with data not persisting in DB
 - Fix map in `view-restaurant` to show location
 - Fix full screen map
 - Add navigation feature to full screen map
@@ -35,4 +36,4 @@
 - See if any other UI improvements can be made
 - See if it make sense to add list of countries/provinces to pick from
 - UI Consideration: chips for tags https://ionicframework.com/docs/api/chip
-- Fix any things noted by prof in Prototype 2
+- Fix any things noted by prof in Prototype 2 that are not on the list above

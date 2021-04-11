@@ -20,9 +20,9 @@ export class ViewRestaurantPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    const name = this.activatedRoute.snapshot.paramMap.get('name');
-    this.restaurant = this.data.getRestaurantByName(name);
-    console.log(this.data.getRestaurantByName(name));
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.restaurant = this.data.getRestaurantById(id);
+    console.log(this.data.getRestaurantById(id));
   }
 
   getBackButtonText() {

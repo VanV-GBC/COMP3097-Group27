@@ -1,6 +1,6 @@
 import { Address } from './address';
 export interface Restaurant {
-  id: number;
+  id: string;
   name: string;
   rating?: number;
   address: Address;

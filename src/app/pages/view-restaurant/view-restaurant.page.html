@@ -6,8 +6,10 @@
         defaultHref="/tabs/restaurant-list"
       ></ion-back-button>
     </ion-buttons>
-    <ion-buttons slot="primary">
-      <!-- TODO: Add rout to Add page and edit it there-->
+    <ion-buttons
+      slot="primary"
+      [routerLink]="['/tabs/add-restaurant', restaurant.id]"
+    >
       <ion-icon slot="icons-only" name="create">Edit</ion-icon>
     </ion-buttons>
 
@@ -40,15 +42,15 @@
           <ion-label>Tags</ion-label>
 
           <ion-select
-            value="japanese"
+            [(ngModel)]="restaurant.tags"
             multiple="true"
             placeholder="Select Tags"
           >
-            <ion-select-option value="japanese">Japanese</ion-select-option>
-            <ion-select-option value="mexican">Mexican</ion-select-option>
-            <ion-select-option value="grill">Grill</ion-select-option>
-            <ion-select-option value="vegetarian">Vegetarian</ion-select-option>
-            <ion-select-option value="chinese">Chinese</ion-select-option>
+            <ion-select-option value="1">Japanese</ion-select-option>
+            <ion-select-option value="2">Mexican</ion-select-option>
+            <ion-select-option value="3">Grill</ion-select-option>
+            <ion-select-option value="4">Vegetarian</ion-select-option>
+            <ion-select-option value="5">Chinese</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>
