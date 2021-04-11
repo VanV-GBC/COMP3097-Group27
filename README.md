@@ -18,7 +18,7 @@
 - ~~Add confirmation on delete~~ (DONE)
 - ~~Fix ability to update rating everywhere~~ (DONE)
 - ~~Add sorting capability~~ (DONE)
-- Make tag selection based on stored data
+- ~~Make tag selection based on stored data~~ (DONE)
 - Fix map in `view-restaurant` to show location
 - Fix full screen map
 - Add navigation feature to full screen map

@@ -46,11 +46,9 @@
             multiple="true"
             placeholder="Select Tags"
           >
-            <ion-select-option value="1">Japanese</ion-select-option>
-            <ion-select-option value="2">Mexican</ion-select-option>
-            <ion-select-option value="3">Grill</ion-select-option>
-            <ion-select-option value="4">Vegetarian</ion-select-option>
-            <ion-select-option value="5">Chinese</ion-select-option>
+            <ion-select-option *ngFor="let tag of tags" [value]="tag.id"
+              >{{tag.name}}</ion-select-option
+            >
           </ion-select>
         </ion-item>
       </ion-col>

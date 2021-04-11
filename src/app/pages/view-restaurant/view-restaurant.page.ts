@@ -1,3 +1,4 @@
+import { Tag } from './../../services/tag';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../services/data.service';
@@ -12,17 +13,20 @@ import { Restaurant } from '../../services/restaurant';
 })
 export class ViewRestaurantPage implements OnInit {
   public restaurant: Restaurant;
+  tags: Tag[] = [];
 
   constructor(
     private data: DataService,
     private activatedRoute: ActivatedRoute,
     private callNumber: CallNumber
-  ) {}
+  ) {
+    this.tags = this.data.tags;
+  }
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.restaurant = this.data.getRestaurantById(id);
-    console.log(this.data.getRestaurantById(id));
+    this.tags = this.data.tags;
   }
 
   getBackButtonText() {

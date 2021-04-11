@@ -1,3 +1,4 @@
+import { Tag } from './../../services/tag';
 import { Restaurant } from './../../services/restaurant';
 import { Component } from '@angular/core';
 import { DataService } from '../../services/data.service';
@@ -11,6 +12,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class AddRestaurantPage {
   restaurant: Restaurant = new Restaurant();
+  tags: Tag[] = [];
   pageTitle: string = 'Add';
   isAdd: boolean = true;
   constructor(
@@ -20,10 +22,12 @@ export class AddRestaurantPage {
     public alertController: AlertController
   ) {
     this.restaurant = new Restaurant();
+    this.tags = this.data.tags;
   }
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.tags = this.data.tags;
     if (!!id) {
       this.restaurant = this.data.getRestaurantById(id);
       if (this.restaurant && this.restaurant.id !== '') {
