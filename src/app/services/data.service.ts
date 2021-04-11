@@ -175,6 +175,29 @@ export class DataService {
     }
   }
 
+  public sortRestaurants(by: string, order: string) {
+    if (by === 'proximity') {
+      // TODO: figure out how to sort based on proximity
+      // need lat/lon of place and current lat/lon of user
+    } else if (by === 'name') {
+      if (order === 'asc') {
+        this.restaurants.sort((a, b) => (a[by] > b[by] ? 1 : -1));
+      } else if (order === 'desc') {
+        this.restaurants.sort((a, b) => (a[by] < b[by] ? 1 : -1));
+      }
+    } else if (by == 'rating') {
+      if (order === 'asc') {
+        this.restaurants.sort((a, b) => {
+          return a[by] - b[by];
+        });
+      } else if (order === 'desc') {
+        this.restaurants.sort((a, b) => {
+          return b[by] - a[by];
+        });
+      }
+    }
+  }
+
   public getRestaurantById(id: string): Restaurant {
     return this.restaurants.find((i) => i.id === id);
   }

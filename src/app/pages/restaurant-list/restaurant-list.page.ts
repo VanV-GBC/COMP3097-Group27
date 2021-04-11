@@ -8,6 +8,9 @@ import { Restaurant } from '../../services/restaurant';
   styleUrls: ['restaurant-list.page.scss'],
 })
 export class RestaurantListPage {
+  sortOrder = 'desc';
+  sortBy = 'name';
+
   constructor(private data: DataService) {}
 
   refresh(ev) {
@@ -18,5 +21,11 @@ export class RestaurantListPage {
 
   getRestaurants(): Restaurant[] {
     return this.data.restaurants;
+  }
+
+  sort() {
+    console.log(this.sortOrder);
+    console.log(this.sortBy);
+    this.data.sortRestaurants(this.sortBy, this.sortOrder);
   }
 }

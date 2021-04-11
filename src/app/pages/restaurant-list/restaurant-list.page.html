@@ -11,7 +11,12 @@
         <ion-col size="6">
           <ion-item>
             <ion-label>Sort By</ion-label>
-            <ion-select value="name" multiple="false" class="sort-by-dropdown">
+            <ion-select
+              [(ngModel)]="sortBy"
+              multiple="false"
+              class="sort-by-dropdown"
+              (ionChange)="sort()"
+            >
               <ion-select-option value="name">Name</ion-select-option>
               <ion-select-option value="rating">Rating</ion-select-option>
               <ion-select-option value="proximity">Proximity</ion-select-option>
@@ -19,7 +24,7 @@
           </ion-item>
         </ion-col>
         <ion-col size="6">
-          <ion-segment value="asc">
+          <ion-segment [(ngModel)]="sortOrder" (click)="sort()">
             <ion-segment-button value="asc">
               <ion-icon name="arrow-up"></ion-icon>
             </ion-segment-button>

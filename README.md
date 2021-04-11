@@ -17,7 +17,7 @@
 - ~~Add ability to delete places~~ (DONE)
 - ~~Add confirmation on delete~~ (DONE)
 - ~~Fix ability to update rating everywhere~~ (DONE)
-- Fix sorting capability
+- ~~Add sorting capability~~ (DONE)
 - Make tag selection based on stored data
 - Fix map in `view-restaurant` to show location
 - Fix full screen map
@@ -33,6 +33,10 @@
 - Add search ability
 - Fix issue with data not persisting in storage
 - Fix tag fields to load from DB
+- Fix how phone # is displayed and show on input
+- Figure out how to sort by proximity
+- Make current position of a person available in the rest of the app for sorting by proximity
+- Get lat/lon of places based on API for sorting by proximity
 - Consider storing one tag/restaurant in one key not all tags/restaurants in just 2 keys
 - See if any other UI improvements can be made
 - See if it make sense to add list of countries/provinces to pick from
