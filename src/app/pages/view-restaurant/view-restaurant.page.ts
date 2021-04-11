@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Restaurant, DataService } from '../../services/data.service';
+import { DataService } from '../../services/data.service';
 import { CallNumber } from '@ionic-native/call-number/ngx';
+import { Restaurant } from '../../services/restaurant';
 
 @Component({
   selector: 'app-view-restaurant',

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Restaurant, DataService } from '../../services/data.service';
+import { DataService } from '../../services/data.service';
+import { Restaurant } from '../../services/restaurant';
 
 @Component({
   selector: 'map-fullscreen',
@@ -8,7 +9,6 @@ import { Restaurant, DataService } from '../../services/data.service';
   styleUrls: ['./map-fullscreen.page.scss'],
 })
 export class MapFullscreenPage implements OnInit {
-
   public restaurant: Restaurant;
 
   constructor(
@@ -27,5 +27,4 @@ export class MapFullscreenPage implements OnInit {
     const mode = win && win.Ionic && win.Ionic.mode;
     return mode === 'ios' ? 'Back' : '';
   }
-
 }

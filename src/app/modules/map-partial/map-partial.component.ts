@@ -1,6 +1,6 @@
-import { Restaurant } from './../../services/data.service';
-import { Component, Input ,ViewChild } from '@angular/core';
-import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps'
+import { Restaurant } from './../../services/restaurant';
+import { Component, Input, ViewChild } from '@angular/core';
+import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps';
 
 //declare var google;
 
@@ -9,14 +9,13 @@ import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps'
   templateUrl: './map-partial.component.html',
   styleUrls: ['./map-partial.component.scss'],
 })
-
 export class MapPartialComponent {
   @Input() restaurant: Restaurant;
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
-  @ViewChild(MapInfoWindow, {static: false}) infoWindow: MapInfoWindow;
+  @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
 
-  center = {lat: 24, lng: 12};
-  markerOptions = {draggable: false};
+  center = { lat: 24, lng: 12 };
+  markerOptions = { draggable: false };
   markerPositions: google.maps.LatLngLiteral[] = [];
   zoom = 4;
   display?: google.maps.LatLngLiteral;
@@ -38,5 +37,4 @@ export class MapPartialComponent {
   }
 
   constructor() {}
-
 }
