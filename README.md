@@ -16,7 +16,7 @@
 - ~~Add ability to edit places~~ (DONE)
 - ~~Add ability to delete places~~ (DONE)
 - ~~Add confirmation on delete~~ (DONE)
-- Fix ability to update rating everywhere
+- ~~Fix ability to update rating everywhere~~ (DONE)
 - Fix issue with data not persisting in DB
 - Fix map in `view-restaurant` to show location
 - Fix full screen map
@@ -33,6 +33,7 @@
 - Fix sorting capability
 - Fix tag fields to load from DB
 - Fix ability to add tags
+- Consider storing one tag/restaurant in one key not all tags/restaurants in just 2 keys
 - See if any other UI improvements can be made
 - See if it make sense to add list of countries/provinces to pick from
 - UI Consideration: chips for tags https://ionicframework.com/docs/api/chip
