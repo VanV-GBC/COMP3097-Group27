@@ -7,11 +7,14 @@
 #### Prototype 2
 
 - ~~Improve UI for all pages~~ (DONE)
-- ~~Add Data Layer~~ (DONE)
-- Fix map in `view-restaurant` to show location
-- Add full screen map with navigation features
-- Implement data access layer
+- ~~Add DB Connector Layer~~ (DONE)
+- ~~Implement data access layer~~ (DONE)
+- ~~Add ability to call the place~~ (DONE)
 - Add dummy data to db if DB is empty
+- Fix map in `view-restaurant` to show location
+- Fix full screen map
+- Add navigation feature to full screen map
+- Allow calling a place or canceling navigation while driving feature to full screen map
 - Add ability to add places
 - Add ability to edit places
 - Add ability to delete places
@@ -24,5 +27,7 @@
 - Add form validation
 - Add Ability to share places on Facebook, Twitter and over email
 - Add form validation
+- Add a splash page
+- See if any other UI improvements can be made
 - UI Consideration: chips for tags https://ionicframework.com/docs/api/chip
 - Fix any things noted by prof in Prototype 2

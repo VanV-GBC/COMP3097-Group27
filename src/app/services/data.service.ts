@@ -77,6 +77,12 @@ export class DataService {
         this.db.fetchRestaurants().subscribe((item) => {
           this.restaurants = item;
         });
+        if (this.restaurants.length == 0) {
+          this.restaurants = this.dummyRestaurantData;
+        }
+        if (this.tags.length == 0) {
+          this.tags = this.dummyRestaurantData;
+        }
       }
     });
   }
