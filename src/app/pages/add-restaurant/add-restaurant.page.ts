@@ -54,7 +54,7 @@ export class AddRestaurantPage {
 
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
-      header: 'Confirm Deletioins',
+      header: 'Confirm Deletion',
       message: `Are you sure you want to delete ${this.restaurant.name}?`,
       buttons: [
         {
