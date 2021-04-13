@@ -1,3 +1,4 @@
+import { Address } from './../../services/address';
 import { Restaurant } from './../../services/restaurant';
 import { Component, Input, ViewChild } from '@angular/core';
 import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps';
@@ -10,11 +11,13 @@ import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps';
   styleUrls: ['./map-partial.component.scss'],
 })
 export class MapPartialComponent {
-  @Input() restaurant: Restaurant;
+
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
   @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
 
-  center = { lat: 24, lng: 12 };
+
+
+  center = { lat: 43.7087172 , lng: -79.4280774 };
   markerOptions = { draggable: false };
   markerPositions: google.maps.LatLngLiteral[] = [];
   zoom = 4;

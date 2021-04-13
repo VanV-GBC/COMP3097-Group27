@@ -1,7 +1,7 @@
+import { AddRestaurantPage } from './../../pages/add-restaurant/add-restaurant.page';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { GoogleMapsModule } from '@angular/google-maps';
-
 import { MapPartialComponent } from './map-partial.component';
 
 @NgModule({
@@ -11,7 +11,7 @@ import { MapPartialComponent } from './map-partial.component';
     GoogleMapsModule,
   ],
   exports:[MapPartialComponent, GoogleMapsModule],
-  providers: [],
+  providers: [AddRestaurantPage],
   bootstrap: [MapPartialComponent],
 })
 export class MapPartialModule {}

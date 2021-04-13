@@ -1,9 +1,10 @@
 import { Tag } from './../../services/tag';
 import { Restaurant } from './../../services/restaurant';
-import { Component } from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { DataService } from '../../services/data.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { Router,ActivatedRoute, NavigationStart } from '@angular/router';
+import { AlertController, ToastController, NavController, NavParams } from '@ionic/angular';
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 
 @Component({
   selector: 'app-add-restaurant',
@@ -11,19 +12,29 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['add-restaurant.page.scss'],
 })
 export class AddRestaurantPage {
-  restaurant: Restaurant = new Restaurant();
+  @Input() restaurant: Restaurant;
   tags: Tag[] = [];
   pageTitle: string = 'Add';
   isAdd: boolean = true;
+
+  options: NativeGeocoderOptions = {
+    useLocale: true,
+    maxResults: 1
+  };
+
   constructor(
     private data: DataService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private nativeGeocoder: NativeGeocoder,
   ) {
     this.restaurant = new Restaurant();
     this.tags = this.data.tags;
   }
+
+
+
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -38,9 +49,14 @@ export class AddRestaurantPage {
   }
 
   onSave() {
+
+    let searchString = this.restaurant.name + " " + this.restaurant.address.city;
     if (this.isAdd) {
+
+      this.onGetMap(searchString);
       this.data.addRestaurant(this.restaurant);
     } else {
+      this.onGetMap(searchString);
       this.data.updateRestaurant(this.restaurant);
     }
     this.restaurant = new Restaurant();
@@ -81,4 +97,18 @@ export class AddRestaurantPage {
   onRatingChange(rating) {
     this.restaurant.rating = rating;
   }
+
+  onGetMap(sstring) {
+
+
+  this.nativeGeocoder.forwardGeocode( sstring , this.options)
+  .then((result: NativeGeocoderResult[]) => {
+      this.restaurant.address.lat = parseFloat(result[0].latitude);
+      this.restaurant.address.lon = parseFloat(result[0].longitude);
+
+  })
+  .catch((error: any) => console.log(error));
+
+  }
+
 }

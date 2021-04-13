@@ -1,4 +1,5 @@
-import { MapFullscreenPageModule } from './../map-fullscreen/map-fullscreen.module';
+// import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+// import { MapFullscreenPageModule } from './../map-fullscreen/map-fullscreen.module';
 import { MapPartialModule } from './../../modules/map-partial/map-partial.module';
 import { MapPartialComponent } from './../../modules/map-partial/map-partial.component';
 import { NgModule } from '@angular/core';
@@ -19,8 +20,8 @@ import { IonicRatingComponentModule } from 'ionic-rating-component';
     IonicModule,
     ViewRestaurantPageRoutingModule,
     MapPartialModule,
-    IonicRatingComponentModule,
+    IonicRatingComponentModule
   ],
-  declarations: [ViewRestaurantPage, MapPartialComponent],
+  declarations: [ViewRestaurantPage, MapPartialComponent]
 })
 export class ViewRestaurantPageModule {}
