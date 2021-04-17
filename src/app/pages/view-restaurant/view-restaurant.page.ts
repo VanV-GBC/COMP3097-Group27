@@ -1,11 +1,12 @@
 import { Tag } from './../../services/tag';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { Restaurant } from '../../services/restaurant';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { Platform } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-view-restaurant',
@@ -13,7 +14,8 @@ import { Platform } from '@ionic/angular';
   styleUrls: ['./view-restaurant.page.scss'],
   providers: [CallNumber],
 })
-export class ViewRestaurantPage implements OnInit {
+export class ViewRestaurantPage implements OnInit, OnDestroy {
+  private subscription: Subscription;
   public restaurant: Restaurant;
   tags: Tag[] = [];
   isSocialSharingAvailable = false;
@@ -35,61 +37,67 @@ export class ViewRestaurantPage implements OnInit {
     this.tags = this.data.tags;
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   ngOnInit() {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.restaurant = this.data.getRestaurantById(id);
-    this.tags = this.data.tags;
-    if (this.isAndroid || this.isApple) {
-      // Check if sharing is supported
-      this.socialSharing
-        .canShareViaEmail()
-        .then(() => {
-          this.isEmailSharingAvailable = true;
-          this.isSocialSharingAvailable =
-            this.isEmailSharingAvailable ||
-            this.isTwitterSharingAvailable ||
-            this.isFacebookSharingAvailable;
-        })
-        .catch(() => {
-          this.isEmailSharingAvailable = false;
-          this.isSocialSharingAvailable =
-            this.isEmailSharingAvailable ||
-            this.isTwitterSharingAvailable ||
-            this.isFacebookSharingAvailable;
-        });
-      this.socialSharing
-        .canShareVia(this.fbAppName, 'test', null, null, null)
-        .then(() => {
-          this.isFacebookSharingAvailable = true;
-          this.isSocialSharingAvailable =
-            this.isEmailSharingAvailable ||
-            this.isTwitterSharingAvailable ||
-            this.isFacebookSharingAvailable;
-        })
-        .catch(() => {
-          this.isFacebookSharingAvailable = false;
-          this.isSocialSharingAvailable =
-            this.isEmailSharingAvailable ||
-            this.isTwitterSharingAvailable ||
-            this.isFacebookSharingAvailable;
-        });
-      this.socialSharing
-        .canShareVia(this.twAppName, 'test', null, null, null)
-        .then(() => {
-          this.isTwitterSharingAvailable = true;
-          this.isSocialSharingAvailable =
-            this.isEmailSharingAvailable ||
-            this.isTwitterSharingAvailable ||
-            this.isFacebookSharingAvailable;
-        })
-        .catch(() => {
-          this.isTwitterSharingAvailable = false;
-          this.isSocialSharingAvailable =
-            this.isEmailSharingAvailable ||
-            this.isTwitterSharingAvailable ||
-            this.isFacebookSharingAvailable;
-        });
-    }
+    this.subscription = this.activatedRoute.params.subscribe((params) => {
+      const id = params['id'];
+      this.restaurant = this.data.getRestaurantById(id);
+      this.tags = this.data.tags;
+      if (this.isAndroid || this.isApple) {
+        // Check if sharing is supported
+        this.socialSharing
+          .canShareViaEmail()
+          .then(() => {
+            this.isEmailSharingAvailable = true;
+            this.isSocialSharingAvailable =
+              this.isEmailSharingAvailable ||
+              this.isTwitterSharingAvailable ||
+              this.isFacebookSharingAvailable;
+          })
+          .catch(() => {
+            this.isEmailSharingAvailable = false;
+            this.isSocialSharingAvailable =
+              this.isEmailSharingAvailable ||
+              this.isTwitterSharingAvailable ||
+              this.isFacebookSharingAvailable;
+          });
+        this.socialSharing
+          .canShareVia(this.fbAppName, 'test', null, null, null)
+          .then(() => {
+            this.isFacebookSharingAvailable = true;
+            this.isSocialSharingAvailable =
+              this.isEmailSharingAvailable ||
+              this.isTwitterSharingAvailable ||
+              this.isFacebookSharingAvailable;
+          })
+          .catch(() => {
+            this.isFacebookSharingAvailable = false;
+            this.isSocialSharingAvailable =
+              this.isEmailSharingAvailable ||
+              this.isTwitterSharingAvailable ||
+              this.isFacebookSharingAvailable;
+          });
+        this.socialSharing
+          .canShareVia(this.twAppName, 'test', null, null, null)
+          .then(() => {
+            this.isTwitterSharingAvailable = true;
+            this.isSocialSharingAvailable =
+              this.isEmailSharingAvailable ||
+              this.isTwitterSharingAvailable ||
+              this.isFacebookSharingAvailable;
+          })
+          .catch(() => {
+            this.isTwitterSharingAvailable = false;
+            this.isSocialSharingAvailable =
+              this.isEmailSharingAvailable ||
+              this.isTwitterSharingAvailable ||
+              this.isFacebookSharingAvailable;
+          });
+      }
+    });
   }
 
   getBackButtonText() {

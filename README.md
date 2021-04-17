@@ -22,12 +22,12 @@
 
 #### Final Version
 
-- ~Add a splash page~ (DONE)
+- ~~Add a splash page~~ (DONE)
 - Fix issue with data not persisting in storage
-- Fix how phone # is displayed and show on input
+- ~~Fix how phone # is displayed~~ (DONE)
 - Add ability to add/remove/edit tags
-- Add form validation
-- ~Add Ability to share places on Facebook, Twitter and over email~ (DONE)
+- ~~Add form validation~~ (DONE)
+- ~~Add Ability to share places on Facebook, Twitter and over email~~(DONE)
 - Add search ability
 - Fix map in `view-restaurant` to show location
 - Fix full screen map
@@ -43,3 +43,4 @@
 - See if it make sense to add list of countries/provinces to pick from
 - UI Consideration: chips for tags https://ionicframework.com/docs/api/chip
 - Figure out how to sort by proximity
+- Add phone field mask on input

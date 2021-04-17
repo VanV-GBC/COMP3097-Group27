@@ -1,10 +1,19 @@
 import { Tag } from './../../services/tag';
 import { Restaurant } from './../../services/restaurant';
-import { Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DataService } from '../../services/data.service';
-import { Router,ActivatedRoute, NavigationStart } from '@angular/router';
-import { AlertController, ToastController, NavController, NavParams } from '@ionic/angular';
-import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
+import {
+  AlertController,
+  ToastController,
+  NavController,
+  NavParams,
+} from '@ionic/angular';
+import {
+  NativeGeocoder,
+  NativeGeocoderResult,
+  NativeGeocoderOptions,
+} from '@ionic-native/native-geocoder/ngx';
 
 @Component({
   selector: 'app-add-restaurant',
@@ -14,12 +23,18 @@ import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@io
 export class AddRestaurantPage {
   @Input() restaurant: Restaurant;
   tags: Tag[] = [];
+  validation = {
+    name: false,
+    street: false,
+    city: false,
+    province: false,
+  };
   pageTitle: string = 'Add';
   isAdd: boolean = true;
 
   options: NativeGeocoderOptions = {
     useLocale: true,
-    maxResults: 1
+    maxResults: 1,
   };
 
   constructor(
@@ -27,14 +42,11 @@ export class AddRestaurantPage {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public alertController: AlertController,
-    private nativeGeocoder: NativeGeocoder,
+    private nativeGeocoder: NativeGeocoder
   ) {
     this.restaurant = new Restaurant();
     this.tags = this.data.tags;
   }
-
-
-
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -49,18 +61,52 @@ export class AddRestaurantPage {
   }
 
   onSave() {
-
-    let searchString = this.restaurant.name + " " + this.restaurant.address.city;
-    if (this.isAdd) {
-
-      this.onGetMap(searchString);
-      this.data.addRestaurant(this.restaurant);
-    } else {
-      this.onGetMap(searchString);
-      this.data.updateRestaurant(this.restaurant);
+    let searchString =
+      this.restaurant.name + ' ' + this.restaurant.address.city;
+    this.validate();
+    if (
+      !!this.restaurant.name &&
+      !!this.restaurant.address.city &&
+      !!this.restaurant.address.street &&
+      !!this.restaurant.address.province
+    ) {
+      if (this.isAdd) {
+        this.onGetMap(searchString);
+        this.data.addRestaurant(this.restaurant);
+      } else {
+        this.onGetMap(searchString);
+        this.data.updateRestaurant(this.restaurant);
+      }
+      this.restaurant = new Restaurant();
+      this.router.navigate(['/tabs/restaurant-list']);
     }
-    this.restaurant = new Restaurant();
-    this.router.navigate(['/tabs/restaurant-list']);
+  }
+
+  isValid() {
+    return (
+      this.validation.name &&
+      this.validation.city &&
+      this.validation.province &&
+      this.validation.street
+    );
+  }
+
+  validate(type = 'all') {
+    if (type == 'name') {
+      this.validation.name = !this.restaurant.name;
+    } else if (type == 'city') {
+      this.validation.city = !this.restaurant.address.city;
+    } else if (type == 'province') {
+      this.validation.province = !this.restaurant.address.province;
+    } else if (type == 'street') {
+      this.validation.street = !this.restaurant.address.street;
+    } else {
+      this.validation.name = !this.restaurant.name;
+      this.validation.city = !this.restaurant.address.city;
+      this.validation.province = !this.restaurant.address.province;
+      this.validation.street = !this.restaurant.address.street;
+    }
+    this.isValid();
   }
 
   async presentAlertConfirm() {
@@ -99,16 +145,12 @@ export class AddRestaurantPage {
   }
 
   onGetMap(sstring) {
-
-
-  this.nativeGeocoder.forwardGeocode( sstring , this.options)
-  .then((result: NativeGeocoderResult[]) => {
-      this.restaurant.address.lat = parseFloat(result[0].latitude);
-      this.restaurant.address.lon = parseFloat(result[0].longitude);
-
-  })
-  .catch((error: any) => console.log(error));
-
+    this.nativeGeocoder
+      .forwardGeocode(sstring, this.options)
+      .then((result: NativeGeocoderResult[]) => {
+        this.restaurant.address.lat = parseFloat(result[0].latitude);
+        this.restaurant.address.lon = parseFloat(result[0].longitude);
+      })
+      .catch((error: any) => console.log(error));
   }
-
 }

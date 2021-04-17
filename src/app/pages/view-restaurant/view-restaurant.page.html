@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button
         [text]="getBackButtonText()"
-        defaultHref="/tabs/restaurant-list"
+        [routerLink]="['/tabs/restaurant-list']"
       ></ion-back-button>
     </ion-buttons>
     <ion-buttons
@@ -65,13 +65,16 @@
             {{restaurant.address.country}}
           </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row *ngIf="!!restaurant.phone">
           <ion-col size="4"> Phone: </ion-col>
-          <ion-col size="8">{{restaurant.phone}}</ion-col>
+          <ion-col size="8"
+            >({{restaurant.phone |slice:0:3}}) {{restaurant.phone
+            |slice:3:6}}-{{restaurant.phone |slice:6:10}}</ion-col
+          >
         </ion-row>
       </ion-col>
       <ion-col size="3">
-        <ion-col size="6">
+        <ion-col size="6" *ngIf="!!restaurant.phone">
           <ion-button (click)="callPlace(restaurant.phone)" shape="round">
             <ion-icon name="call"></ion-icon>
           </ion-button>

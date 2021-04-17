@@ -15,24 +15,17 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'view-restaurant',
-    loadChildren: () =>
-      import('./pages/view-restaurant/view-restaurant.module').then(
-        (m) => m.ViewRestaurantPageModule
-      ),
-  },
-  {
-    path: 'tabs/add-restaurant/:id',
-    loadChildren: () =>
-      import('./pages/add-restaurant/add-restaurant.module').then(
-        (m) => m.AddRestaurantPageModule
-      ),
-  },
-  {
     path: 'restaurant/:name/mapfs',
     loadChildren: () =>
       import('./pages/map-fullscreen/map-fullscreen.module').then(
         (m) => m.MapFullscreenPageModule
+      ),
+  },
+  {
+    path: 'view-restaurant',
+    loadChildren: () =>
+      import('./pages/view-restaurant/view-restaurant.module').then(
+        (m) => m.ViewRestaurantPageModule
       ),
   },
 ];

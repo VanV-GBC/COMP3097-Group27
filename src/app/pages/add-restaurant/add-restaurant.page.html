@@ -12,38 +12,57 @@
           type="text"
           id="name"
           required
+          (focusout)="validate('name')"
           placeholder="Restaurant Name"
           [(ngModel)]="restaurant.name"
           name="name"
         ></ion-input>
+        <ion-text color="danger" *ngIf="validation.name">
+          Restaurant Name is required!
+        </ion-text>
         <ion-input
           type="text"
           id="street"
           required
+          (focusout)="validate('street')"
+          minlength="1"
           placeholder="Street Address"
           [(ngModel)]="restaurant.address.street"
           name="address.street"
         ></ion-input>
+        <ion-text color="danger" *ngIf="validation.street">
+          Street Address is required!
+        </ion-text>
         <ion-row>
           <ion-col size="6">
             <ion-input
               type="text"
               id="city"
               required
+              (focusout)="validate('city')"
+              minlength="1"
               placeholder="City"
               [(ngModel)]="restaurant.address.city"
               name="address.city"
             ></ion-input>
+            <ion-text color="danger" *ngIf="validation.city">
+              City is required!
+            </ion-text>
           </ion-col>
           <ion-col size="6">
             <ion-input
               type="text"
               id="province"
               required
+              (focusout)="validate('province')"
+              minlength="1"
               placeholder="Province/State"
               [(ngModel)]="restaurant.address.province"
               name="address.province"
             ></ion-input>
+            <ion-text color="danger" *ngIf="validation.province">
+              Province/State is required!
+            </ion-text>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -88,7 +107,7 @@
               activeColor="#dbb04a"
               defaultColor="#dbb04a"
               readonly="false"
-              rating="0"
+              rating=""
               fontSize="20px"
               [(ngModel)]="restaurant.rating"
               name="rating"
@@ -124,6 +143,7 @@
           expand="block"
           fill="solid"
           shape="round"
+          [disabled]="isValid()"
           (click)="onSave()"
         >
           <ion-icon slot="start" name="save"></ion-icon> Save

@@ -27,6 +27,13 @@ const routes: Routes = [
           import('../about/about.module').then((m) => m.AboutPageModule),
       },
       {
+        path: 'add-restaurant/:id',
+        loadChildren: () =>
+          import('../add-restaurant/add-restaurant.module').then(
+            (m) => m.AddRestaurantPageModule
+          ),
+      },
+      {
         path: '',
         redirectTo: '/tabs/restaurant-list',
         pathMatch: 'full',

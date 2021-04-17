@@ -4,7 +4,7 @@ import { MapPartialModule } from './../../modules/map-partial/map-partial.module
 import { MapPartialComponent } from './../../modules/map-partial/map-partial.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicModule } from '@ionic/angular';
 
@@ -18,10 +18,11 @@ import { IonicRatingComponentModule } from 'ionic-rating-component';
     BrowserModule,
     FormsModule,
     IonicModule,
+    ReactiveFormsModule,
     ViewRestaurantPageRoutingModule,
     MapPartialModule,
-    IonicRatingComponentModule
+    IonicRatingComponentModule,
   ],
-  declarations: [ViewRestaurantPage, MapPartialComponent]
+  declarations: [ViewRestaurantPage, MapPartialComponent],
 })
 export class ViewRestaurantPageModule {}

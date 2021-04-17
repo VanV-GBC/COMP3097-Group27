@@ -12,6 +12,9 @@ import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { SplashScreenComponent } from './modules/splash-screen/splash-screen.component';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   declarations: [AppComponent, SplashScreenComponent],
@@ -20,6 +23,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    NgxMaskModule.forRoot(),
     IonicStorageModule.forRoot({
       name: 'my_guide',
       driverOrder: [
