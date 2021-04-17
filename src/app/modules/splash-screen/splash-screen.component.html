@@ -1,0 +1,11 @@
+<div
+  *ngIf="showSplash"
+  class="app-splash"
+  [ngStyle]="{ opacity: opacityChange, transition: splashTransition }"
+>
+  <div class="app-splash-content">
+    <ion-icon name="restaurant" class="logo"></ion-icon>
+    <h1>My Restaurant Guide</h1>
+    <div data-text="Loading ..." class="loading-text">Loading ...</div>
+  </div>
+</div>

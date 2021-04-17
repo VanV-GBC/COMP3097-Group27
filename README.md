@@ -19,24 +19,22 @@
 - ~~Fix ability to update rating everywhere~~ (DONE)
 - ~~Add sorting capability~~ (DONE)
 - ~~Make tag selection based on stored data~~ (DONE)
+
+#### Final Version
+
+- ~Add a splash page~ (DONE)
+- Fix issue with data not persisting in storage
+- Fix how phone # is displayed and show on input
+- Add ability to add/remove/edit tags
+- Add form validation
+- Add Ability to share places on Facebook, Twitter and over email
+- Add search ability
 - Fix map in `view-restaurant` to show location
 - Fix full screen map
 - Add navigation feature to full screen map
 - Allow calling a place or canceling navigation while driving feature to full screen map
-
-#### Final Version
-
-- Add ability to add/remove/edit tags
-- Add form validation
-- Add Ability to share places on Facebook, Twitter and over email
-- Add a splash page
-- Add search ability
-- Fix issue with data not persisting in storage
-- Fix how phone # is displayed and show on input
-- Figure out how to sort by proximity
 - Make current position of a person available in the rest of the app for sorting by proximity
 - Get lat/lon of places based on API for sorting by proximity
-- Fix any things noted by prof in Prototype 2 that are not on the list above
 
 #### Other Considerations
 
@@ -44,3 +42,4 @@
 - See if any other UI improvements can be made
 - See if it make sense to add list of countries/provinces to pick from
 - UI Consideration: chips for tags https://ionicframework.com/docs/api/chip
+- Figure out how to sort by proximity

@@ -10,9 +10,10 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 import { Drivers } from '@ionic/storage';
 import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import { SplashScreenComponent } from './modules/splash-screen/splash-screen.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SplashScreenComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -27,7 +28,10 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
       ],
     }),
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, NativeGeocoder],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    NativeGeocoder,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
