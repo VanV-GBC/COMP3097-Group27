@@ -96,18 +96,34 @@
     </ion-row>
   </ion-grid>
 
-  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+  <ion-fab
+    horizontal="end"
+    vertical="bottom"
+    slot="fixed"
+    *ngIf="isSocialSharingAvailable"
+  >
     <ion-fab-button color="danger">
       <ion-icon name="share"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="start">
-      <ion-fab-button color="primary">
+      <ion-fab-button
+        color="primary"
+        *ngIf="isFacebookSharingAvailable"
+        (click)="shareThis('facebook',restaurant.name,restaurant.address.street,restaurant.address.city,restaurant.address.province,restaurant.address.postal,restaurant.notes)"
+      >
         <ion-icon name="logo-facebook"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="secondary"
+      <ion-fab-button
+        color="secondary"
+        *ngIf="isTwitterSharingAvailable"
+        (click)="shareThis('twitter',restaurant.name,restaurant.address.street,restaurant.address.city,restaurant.address.province,restaurant.address.postal,restaurant.notes)"
         ><ion-icon name="logo-twitter"></ion-icon
       ></ion-fab-button>
-      <ion-fab-button><ion-icon name="mail"></ion-icon></ion-fab-button>
+      <ion-fab-button
+        *ngIf="isEmailSharingAvailable"
+        (click)="shareThis('email',restaurant.name,restaurant.address.street,restaurant.address.city,restaurant.address.province,restaurant.address.postal,restaurant.notes)"
+        ><ion-icon name="mail"></ion-icon
+      ></ion-fab-button>
     </ion-fab-list>
   </ion-fab>
 </ion-content>

@@ -27,7 +27,7 @@
 - Fix how phone # is displayed and show on input
 - Add ability to add/remove/edit tags
 - Add form validation
-- Add Ability to share places on Facebook, Twitter and over email
+- ~Add Ability to share places on Facebook, Twitter and over email~ (DONE)
 - Add search ability
 - Fix map in `view-restaurant` to show location
 - Fix full screen map

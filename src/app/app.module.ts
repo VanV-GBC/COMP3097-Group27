@@ -11,6 +11,7 @@ import { Drivers } from '@ionic/storage';
 import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { SplashScreenComponent } from './modules/splash-screen/splash-screen.component';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @NgModule({
   declarations: [AppComponent, SplashScreenComponent],
@@ -31,6 +32,7 @@ import { SplashScreenComponent } from './modules/splash-screen/splash-screen.com
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     NativeGeocoder,
+    SocialSharing,
   ],
   bootstrap: [AppComponent],
 })
