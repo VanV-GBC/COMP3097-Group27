@@ -14,7 +14,7 @@
           required
           (focusout)="validate('name')"
           placeholder="Restaurant Name"
-          [ngModel]="restaurant.name"
+          [(ngModel)]="restaurant.name"
           name="name"
         ></ion-input>
         <ion-text color="danger" *ngIf="validation.name">
@@ -27,7 +27,7 @@
           (focusout)="validate('street')"
           minlength="1"
           placeholder="Street Address"
-          [ngModel]="restaurant.address.street"
+          [(ngModel)]="restaurant.address.street"
           name="address.street"
         ></ion-input>
         <ion-text color="danger" *ngIf="validation.street">
@@ -116,20 +116,60 @@
             </ionic-rating-component>
           </ion-col>
         </ion-row>
-        <ion-item>
-          <ion-label>Tags</ion-label>
-          <ion-select
-            multiple="true"
-            id="tags"
-            placeholder="Select Tags"
-            [(ngModel)]="restaurant.tags"
-            name="tags"
-          >
-            <ion-select-option *ngFor="let tag of tags" [value]="tag.id"
-              >{{tag.name}}</ion-select-option
+        <ion-row>
+          <ion-col size="10">
+            <ion-item>
+              <ion-label>Tags</ion-label>
+              <ion-select
+                multiple="true"
+                id="tags"
+                (focusin)="getFreshTagList()"
+                placeholder="Select Tags"
+                [(ngModel)]="restaurant.tags"
+                name="tags"
+              >
+                <ion-select-option *ngFor="let tag of tags" [value]="tag.id"
+                  >{{tag.name}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col size="2" style="margin-top: -10px">
+            <ion-button
+              (click)="addTag()"
+              color="primary"
+              shape="round"
+              size="small"
+              fill="solid"
             >
-          </ion-select>
-        </ion-item>
+              <ion-icon slot="icon-only" name="add"></ion-icon>
+            </ion-button>
+            <ion-button
+              (click)="editTags()"
+              color="danger"
+              shape="round"
+              size="small"
+              fill="solid"
+            >
+              <ion-icon slot="icon-only" name="pencil"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-list *ngIf="showTagEdit">
+          <ion-item *ngFor="let tag of tags">
+            {{tag.name}}
+            <ion-button
+              (click)="removeTag(tag)"
+              style="padding-left: 20px"
+              color="danger"
+            >
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-button>
+            <ion-button (click)="updateTag(tag)" style="padding-left: 10px">
+              <ion-icon slot="icon-only" name="pencil"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-list>
         <ion-item>
           <ion-label position="floating">Notes</ion-label>
           <ion-textarea

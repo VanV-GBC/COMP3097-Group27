@@ -23,6 +23,7 @@ import {
 export class AddRestaurantPage {
   @Input() restaurant: Restaurant;
   tags: Tag[] = [];
+  showTagEdit = false;
   validation = {
     name: false,
     street: false,
@@ -51,7 +52,6 @@ export class AddRestaurantPage {
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.tags = this.data.tags;
-    console.log(this.data);
     if (!!id) {
       this.restaurant = this.data.getRestaurantById(id);
       if (this.restaurant && this.restaurant.id !== '') {
@@ -90,6 +90,69 @@ export class AddRestaurantPage {
       this.validation.province &&
       this.validation.street
     );
+  }
+
+  removeTag(tag: Tag) {
+    this.data.deleteTag(tag);
+    this.getFreshTagList();
+  }
+
+  async updateTag(tag: Tag) {
+    this.getFreshTagList();
+    const alert = await this.alertController.create({
+      header: 'Edit a tag',
+      message: `Please update tag name`,
+      inputs: [{ name: 'tag', type: 'text', value: tag.name }],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            alert.dismiss();
+          },
+        },
+        {
+          text: 'Update',
+          handler: (alertData) => {
+            if (alertData.tag) {
+              tag.name = alertData.tag;
+              this.data.updateTag(tag);
+            }
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
+  editTags() {
+    this.getFreshTagList();
+    this.showTagEdit = !this.showTagEdit;
+  }
+
+  async addTag() {
+    this.getFreshTagList();
+    const alert = await this.alertController.create({
+      header: 'Add a tag',
+      message: `Please enter tag name`,
+      inputs: [{ name: 'tag', type: 'text', placeholder: 'Add a tag' }],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            alert.dismiss();
+          },
+        },
+        {
+          text: 'Add',
+          handler: (alertData) => {
+            if (alertData.tag) {
+              this.data.addTag(alertData.tag);
+            }
+          },
+        },
+      ],
+    });
+    await alert.present();
   }
 
   validate(type = 'all') {
@@ -135,6 +198,10 @@ export class AddRestaurantPage {
       ],
     });
     await alert.present();
+  }
+
+  getFreshTagList() {
+    this.tags = this.data.tags;
   }
 
   onDelete() {

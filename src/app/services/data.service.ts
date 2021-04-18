@@ -18,14 +18,12 @@ export class DataService {
   constructor(private db: DbService, private toast: ToastController) {
     this.getRestaurants();
     this.getTags();
-    console.log(this.tags);
   }
 
   private getRestaurants() {
     this.db
       .get(this._restaurantsStorageKey)
       .then((res) => {
-        console.log(res);
         if (res !== null) {
           this.restaurants = res;
         } else if (res === null) {
@@ -145,11 +143,15 @@ export class DataService {
     }
   }
 
-  public addTag(t: Tag) {
+  public addTag(t: string) {
     const uid = this.generateUniqueId(this.tags);
-    t.id = uid;
-    this.tags.push(t);
-    this.updateStorage(this._tagsStorageKey, this.tags, `Tag ${t.name} added!`);
+    let tag = { name: t, id: uid };
+    this.tags.push(tag);
+    this.updateStorage(
+      this._tagsStorageKey,
+      this.tags,
+      `Tag ${tag.name} added!`
+    );
   }
 
   public updateTag(t: Tag) {
