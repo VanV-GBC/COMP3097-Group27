@@ -25,7 +25,7 @@
 - ~~Add a splash page~~ (DONE)
 - Fix issue with data not persisting in storage
 - ~~Fix how phone # is displayed~~ (DONE)
-- Add ability to add/remove/edit tags
+- ~~Add ability to add/remove/edit tags~~ (DONE)
 - ~~Add form validation~~ (DONE)
 - ~~Add Ability to share places on Facebook, Twitter and over email~~(DONE)
 - Add search ability
