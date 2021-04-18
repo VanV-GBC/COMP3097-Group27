@@ -18,6 +18,7 @@ export class DataService {
   constructor(private db: DbService, private toast: ToastController) {
     this.getRestaurants();
     this.getTags();
+    console.log(this.tags);
   }
 
   private getRestaurants() {

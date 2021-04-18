@@ -1,7 +1,7 @@
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AddRestaurantPage } from './add-restaurant.page';
 import { AddRestaurantPageRoutingModule } from './add-restaurant-routing.module';
 import { IonicRatingComponentModule } from 'ionic-rating-component';

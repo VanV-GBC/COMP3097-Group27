@@ -14,7 +14,7 @@
           required
           (focusout)="validate('name')"
           placeholder="Restaurant Name"
-          [(ngModel)]="restaurant.name"
+          [ngModel]="restaurant.name"
           name="name"
         ></ion-input>
         <ion-text color="danger" *ngIf="validation.name">
@@ -27,7 +27,7 @@
           (focusout)="validate('street')"
           minlength="1"
           placeholder="Street Address"
-          [(ngModel)]="restaurant.address.street"
+          [ngModel]="restaurant.address.street"
           name="address.street"
         ></ion-input>
         <ion-text color="danger" *ngIf="validation.street">

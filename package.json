@@ -22,6 +22,7 @@
     "@angular/router": "^11.2.9",
     "@capacitor/android": "^2.4.7",
     "@capacitor/core": "2.4.7",
+    "@capacitor/storage": "^0.3.6",
     "@ionic-native/call-number": "^5.32.0",
     "@ionic-native/core": "^5.32.0",
     "@ionic-native/native-geocoder": "^5.32.0",
