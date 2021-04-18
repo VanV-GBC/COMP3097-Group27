@@ -28,19 +28,19 @@
 - ~~Add ability to add/remove/edit tags~~ (DONE)
 - ~~Add form validation~~ (DONE)
 - ~~Add Ability to share places on Facebook, Twitter and over email~~(DONE)
-- Add search ability
+- ~~Add search ability~~ (DONE)
 - Fix map in `view-restaurant` to show location
 - Fix full screen map
 - Add navigation feature to full screen map
 - Allow calling a place or canceling navigation while driving feature to full screen map
-- Make current position of a person available in the rest of the app for sorting by proximity
-- Get lat/lon of places based on API for sorting by proximity
 
-#### Other Considerations
+#### Other Considerations (Look into if we have time)
 
 - Consider storing one tag/restaurant in one key not all tags/restaurants in just 2 keys
-- See if any other UI improvements can be made
+- ~~See if any other UI improvements can be made~~
 - See if it make sense to add list of countries/provinces to pick from
-- UI Consideration: chips for tags https://ionicframework.com/docs/api/chip
+- ~~UI Consideration: chips for tags https://ionicframework.com/docs/api/chip~~
+- Make current position of a person available in the rest of the app for sorting by proximity
+- Get lat/lon of places based on API for sorting by proximity
 - Figure out how to sort by proximity
 - Add phone field mask on input

@@ -54,6 +54,7 @@ export class DummyData {
         city: 'Toronto',
         province: 'ON',
       },
+      tags: ['3'],
     },
   ];
 

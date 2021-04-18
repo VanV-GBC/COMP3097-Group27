@@ -5,7 +5,10 @@
     </ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar></ion-searchbar>
+    <ion-searchbar
+      showCancelButton="focus"
+      (ionChange)="filterRestaurants($event)"
+    ></ion-searchbar>
     <ion-grid>
       <ion-row>
         <ion-col size="6">
