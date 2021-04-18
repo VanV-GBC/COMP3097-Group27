@@ -27,7 +27,7 @@ export class DummyData {
         province: 'ON',
         postal: 'M5A 4M8',
       },
-      tags: [7, 8],
+      tags: ['7', '8'],
     },
     {
       id: '2',
@@ -41,7 +41,7 @@ export class DummyData {
         province: 'ON',
         postal: 'M5E 1A6',
       },
-      tags: [6, 9],
+      tags: ['6', '9'],
     },
     {
       id: '3',

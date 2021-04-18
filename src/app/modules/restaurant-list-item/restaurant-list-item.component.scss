@@ -1,6 +1,10 @@
 ionic-rating-component {
-  float: right;
   margin-top: -30px;
+  position: absolute;
+  right: 0px;
+}
+ion-row {
+  width: 100%;
 }
 ion-item h2 {
   font-weight: 600;

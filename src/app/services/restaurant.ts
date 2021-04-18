@@ -9,7 +9,7 @@ export class Restaurant {
   name: string;
   rating?: number;
   address: Address;
-  tags?: number[];
+  tags?: string[];
   phone?: string;
   notes?: string;
 }
